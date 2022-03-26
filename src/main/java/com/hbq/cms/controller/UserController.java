@@ -33,7 +33,7 @@ public class UserController {
      * 列表
      */
     @ApiOperation(value = "查询列表")
-    @PostMapping("/user/list")
+    @PostMapping("/list")
     public Result<PageResult> list(@RequestBody Map<String, Object> params) {
         Page<Map> list= userService.findList(params);
         return Result.succeed(PageResult.restPage(list),"查询成功");
@@ -43,7 +43,7 @@ public class UserController {
      * 查询
      */
     @ApiOperation(value = "查询")
-    @PostMapping("/user/sel/{id}")
+    @PostMapping("/sel/{id}")
     public Result findUserById(@PathVariable Long id) {
         User model = userService.getById(id);
         return Result.succeed(model, "查询成功");
@@ -53,7 +53,7 @@ public class UserController {
      * 新增or更新
      */
     @ApiOperation(value = "新增or更新")
-    @PostMapping("/user/save")
+    @PostMapping("/save")
     public Result save(@RequestBody User user) {
         userService.saveOrUpdate(user);
         return Result.succeed("保存成功");
@@ -63,7 +63,7 @@ public class UserController {
      * 批量新增or更新
      */
     @ApiOperation(value = "批量新增or更新")
-    @PostMapping("/user/saveBatch")
+    @PostMapping("/saveBatch")
     public Result saveBatch(@RequestBody Map<String,List<User>> map) {
         List<User> models = map.get("models");
         userService.saveOrUpdateBatch(models);
@@ -74,7 +74,7 @@ public class UserController {
      * 删除
      */
     @ApiOperation(value = "批量删除")
-    @PostMapping("/user/del")
+    @PostMapping("/del")
     public Result delete(@RequestBody Map<String,List<Long>> map) {
         List<Long> ids = map.get("ids");
         userService.removeByIds(ids);

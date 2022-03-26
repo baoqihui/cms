@@ -9,7 +9,7 @@
             t.name name,  -- 用户名
             t.pwd pwd,  -- 密码
             t.create_time createTime,  -- 创建时间
-            t.update_time updateTime,  -- 更新时间
+            t.update_time updateTime  -- 更新时间
         from user t
         where 1=1
         <if test="p.account != null and p.account != ''">

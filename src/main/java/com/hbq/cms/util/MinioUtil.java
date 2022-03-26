@@ -171,7 +171,9 @@ public class MinioUtil {
                     .method(Method.GET)
                     .build();
             String url = minioClient.getPresignedObjectUrl(build);
-            return StrUtil.subBefore(url, "?", false);
+            String finalUrl = StrUtil.subBefore(url, "?", false);
+            log.info("文件路径预览：{}",finalUrl);
+            return finalUrl;
         } catch (Exception e) {
             e.printStackTrace();
         }

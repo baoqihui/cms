@@ -21,9 +21,9 @@ import java.util.List;
 @CrossOrigin
 @Api(tags = "测试minIO存储")
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/file")
 @AllArgsConstructor
-public class TestMinIOController {
+public class FileController {
 
     @ApiOperation(value = "创建文件夹")
     @PostMapping("/createBucket")
@@ -35,7 +35,6 @@ public class TestMinIOController {
     @PostMapping("/upload")
     public String MinIOUpload(String bucketName, MultipartFile file) throws Exception {
         return MinioUtil.uploadPreview(bucketName, file);
-
     }
 
     @ApiOperation(value = "下载文件")
