@@ -1,0 +1,43 @@
+package com.hbq.cms.service.impl;
+
+import cn.hutool.core.map.MapUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hbq.cms.mapper.MediaMapper;
+import com.hbq.cms.model.Media;
+import com.hbq.cms.service.IMediaService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.Map;
+
+/**
+ * 媒体
+ *
+ * @author hbq
+ * @date 2022-03-26 19:40:25
+ */
+@Slf4j
+@Service
+public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements IMediaService {
+    @Resource
+    private MediaMapper mediaMapper;
+    /**
+     * 列表
+     * @param params
+     * @return
+     */
+    public Page<Map> findList(Map<String, Object> params){
+        Integer pageNum = MapUtil.getInt(params, "pageNum");
+        Integer pageSize = MapUtil.getInt(params, "pageSize");
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        if (pageSize == null) {
+            pageSize = -1;
+        }
+        Page<Map> pages = new Page<>(pageNum, pageSize);
+        return mediaMapper.findList(pages, params);
+    }
+}

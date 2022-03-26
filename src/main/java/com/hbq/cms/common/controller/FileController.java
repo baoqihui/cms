@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @CrossOrigin
-@Api(tags = "测试minIO存储")
+@Api(tags = "minio文件系统")
 @RestController
 @RequestMapping("/file")
 @AllArgsConstructor

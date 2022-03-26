@@ -1,29 +1,23 @@
 package com.hbq.cms.service;
 
+import com.hbq.cms.model.Banner;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hbq.cms.common.model.Result;
-import com.hbq.cms.dto.UserDto;
-import com.hbq.cms.model.User;
 
 import java.util.Map;
 
 /**
- * 用户表
+ * 轮播图
  *
  * @author hbq
- * @date 2022-03-26 12:47:18
+ * @date 2022-03-26 19:53:05
  */
-public interface IUserService extends IService<User> {
+public interface IBannerService extends IService<Banner> {
     /**
      * 列表
      * @param params
      * @return
      */
     Page<Map> findList(Map<String, Object> params);
-
-    Result<String> register(UserDto userDto);
-
-    Result login(UserDto userDto);
 }
 

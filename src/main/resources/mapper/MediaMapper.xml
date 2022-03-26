@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hbq.cms.mapper.MediaMapper">
+    <select id="findList" resultType="map">
+        select
+            t.id id,  -- 
+            t.user_id userId,  -- 用户id
+            t.title title,  -- 标题
+            t.context context,  -- 内容
+            t.files files,  -- 文件集合（,分割 音乐和电影单个路径）
+            t.type type,  -- 类型（1-新闻 2-音乐 3-电影 4-动态）
+            t.create_time createTime,  -- 创建时间
+            t.update_time updateTime  -- 更新时间
+        from media t
+        where 1=1
+        <if test="p.userId != null and p.userId != ''">
+            and t.user_id LIKE '%${p.userId}%'
+        </if>
+        <if test="p.title != null and p.title != ''">
+            and t.title LIKE '%${p.title}%'
+        </if>
+        <if test="p.context != null and p.context != ''">
+            and t.context LIKE '%${p.context}%'
+        </if>
+        <if test="p.files != null and p.files != ''">
+            and t.files LIKE '%${p.files}%'
+        </if>
+        <if test="p.type != null and p.type != ''">
+            and t.type LIKE '%${p.type}%'
+        </if>
+        <if test="p.startTime != null and p.startTime != '' ">
+            and t.create_time >= '${p.startTime}'
+        </if>
+        <if test="p.endTime !=null and p.endTime != '' ">
+            and '${p.endTime}' >= t.create_time
+        </if>
+        order by t.id desc
+    </select>
+</mapper>
