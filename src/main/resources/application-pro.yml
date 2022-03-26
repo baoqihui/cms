@@ -1,0 +1,60 @@
+server:
+  port: 8088
+#spring
+spring:
+  datasource:                   #mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: HBQ521521cf*
+    hikari:
+      max-lifetime: 500000
+  jackson:                     #时间格式化
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  redis:
+    host: localhost # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password:  # Redis服务器连接密码（默认为空）
+    timeout: 3000ms # 连接超时时间（毫秒）
+  servlet:
+    multipart:
+      max-file-size: -1
+      maxRequestSize: -1
+#mybatis配置逻辑删除
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    call-setters-on-nulls: true   #配置返回结果集为空时仍返回字段
+
+#fastDFS配置
+FastDFS:
+  imgPrefixPath: http://120.27.244.176/
+  propertiesPath: /D:/config/fastdfs.properties
+
+#oss配置
+Oos:
+  accessKeyId: LTAI4FoAmdJuwmE5Q6RHffBc
+  accessKeySecret: pMWwp6eiqGrnPTYqk2aHn8Q4AVheTs
+  bucketName: idse-oss
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  filedir: image/
+#七牛云oss配置
+QiNiuOos:
+  ACCESS_KEY: _X-yKzkCDsq7E9VLjvXd-Bao3VlS3UpMKH__4r1_
+  SECRET_KEY: IX2MSKiKVASuMfINOvWg134I_HpCRhnfFydH6TDg
+  BUCKET_NAME: my-new-file
+  DOMAIN: http://file.huijia21.com
+nginx:
+  filePath: /file/
+  filePathForDownload: /file/download/
+  ipAndPortAndFilePrefix: 120.27.244.176:8000/file/
+
+#shiro配置
+shiro:
+  session-timeout: 86400000 #1天
+  session-id-cookie: DEMO_COOKIE
