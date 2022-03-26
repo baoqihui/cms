@@ -1,6 +1,6 @@
 # cms
-[github](https://github.com/baoqihui/cms)
-[gitee](https://gitee.com/idse666666/cms)
++ Github地址：https://github.com/baoqihui/cms
++ Gitee地址(非实时更新)：https://gitee.com/idse666666/cms
 ## 需求
 
 基于vue的媒体综合网站 
