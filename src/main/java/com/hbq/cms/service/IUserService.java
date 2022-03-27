@@ -25,5 +25,7 @@ public interface IUserService extends IService<User> {
     Result<String> register(UserDto userDto);
 
     Result login(UserDto userDto);
+
+    Result updatePwd(UserDto userDto);
 }
 

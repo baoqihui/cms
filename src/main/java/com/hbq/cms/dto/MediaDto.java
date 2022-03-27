@@ -1,10 +1,9 @@
-package com.hbq.cms.model;
+package com.hbq.cms.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
-import com.hbq.cms.common.model.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 
 /**
@@ -15,18 +14,22 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("media")
-public class Media extends SuperEntity {
+public class MediaDto {
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "媒体id（更新时传入）")
+    private Long id;
     @ApiModelProperty(value = "用户id")
+    @NonNull
     private Long userId;
     @ApiModelProperty(value = "标题")
+    @NonNull
     private String title;
     @ApiModelProperty(value = "内容")
     private String context;
     @ApiModelProperty(value = "文件集合（,分割 音乐和电影单个路径）")
     private String files;
+    @NonNull
     @ApiModelProperty(value = "类型（1-新闻 2-音乐 3-电影 4-动态）")
     private Integer type;
 }

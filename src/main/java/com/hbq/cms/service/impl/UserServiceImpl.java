@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbq.cms.common.model.Result;
@@ -71,6 +72,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .eq(User::getAccount, userDto.getAccount())
                 .eq(User::getPwd, SecureUtil.md5(userDto.getPwd()))
         );
-        return Result.succeed(one);
+        if (ObjectUtil.isNull(one)){
+            return Result.failed("账号密码不匹配");
+        }
+        return Result.succeed(one,"登录成功");
+    }
+
+    @Override
+    public Result updatePwd(UserDto userDto) {
+        boolean update = this.update(new LambdaUpdateWrapper<User>()
+                .eq(User::getAccount, userDto.getAccount())
+                .set(User::getPwd, SecureUtil.md5(userDto.getPwd()))
+        );
+        if (!update){
+            return Result.failed("修改失败");
+        }
+        return Result.succeed("修改成功");
     }
 }

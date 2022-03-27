@@ -68,6 +68,14 @@ public class UserController {
     }
 
     /**
+     * 修改密码
+     */
+    @ApiOperation(value = "修改密码")
+    @PostMapping("/updatePwd")
+    public Result updatePwd(@RequestBody UserDto userDto) {
+        return userService.updatePwd(userDto);
+    }
+    /**
      * 新增or更新
      */
     @ApiOperation(value = "新增or更新")

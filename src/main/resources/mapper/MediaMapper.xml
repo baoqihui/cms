@@ -26,8 +26,8 @@
         <if test="p.files != null and p.files != ''">
             and t.files LIKE '%${p.files}%'
         </if>
-        <if test="p.type != null and p.type != ''">
-            and t.type LIKE '%${p.type}%'
+        <if test="p.type != null">
+            and t.type = #{p.type}
         </if>
         <if test="p.startTime != null and p.startTime != '' ">
             and t.create_time >= '${p.startTime}'

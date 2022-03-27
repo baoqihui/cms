@@ -1,8 +1,10 @@
 package com.hbq.cms.service;
 
-import com.hbq.cms.model.Media;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hbq.cms.common.model.Result;
+import com.hbq.cms.dto.MediaDto;
+import com.hbq.cms.model.Media;
 
 import java.util.Map;
 
@@ -19,5 +21,7 @@ public interface IMediaService extends IService<Media> {
      * @return
      */
     Page<Map> findList(Map<String, Object> params);
+
+    Result share(MediaDto mediaDto);
 }
 
