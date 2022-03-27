@@ -30,3 +30,4 @@
    + 持久层框架：`mybatis plus`
    + 非关系数据库：`redis(暂无使用)`
    + 文件存储：`自建minio`
+   + 接口文档: `swagger`

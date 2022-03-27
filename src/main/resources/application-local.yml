@@ -44,7 +44,7 @@ log:
 
 #minio文件服务
 minio:
-  endpoint: https://minio.huijia.cf/
+  endpoint: https://minio.service.cf/
   accessKey: admin
   secretKey: HBQ521521cf*
   bucketName: file
