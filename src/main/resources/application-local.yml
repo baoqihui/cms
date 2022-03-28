@@ -33,11 +33,6 @@ mybatis-plus:
   configuration:
     call-setters-on-nulls: true   #配置返回结果集为空时仍返回字段
 
-#fastDFS配置
-FastDFS:
-  imgPrefixPath: http://120.27.244.176/
-  propertiesPath: /D:/config/fastdfs.properties
-
 #输出日志位置
 log:
   url: C:/logs/demo

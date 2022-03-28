@@ -1,5 +1,6 @@
 package com.hbq.cms.common.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.hbq.cms.util.MinioUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +35,9 @@ public class FileController {
     @ApiOperation(value = "上传文件返回url")
     @PostMapping("/upload")
     public String MinIOUpload(String bucketName, MultipartFile file) throws Exception {
+        if (ObjectUtil.isEmpty(bucketName)) {
+            bucketName = "file";
+        }
         return MinioUtil.uploadPreview(bucketName, file);
     }
 
