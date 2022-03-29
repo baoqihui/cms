@@ -31,3 +31,4 @@
    + 非关系数据库：`redis`
    + 文件存储：`自建minio`
    + 接口文档: `swagger`
+   + 容器化：`docker`
