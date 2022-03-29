@@ -6,6 +6,7 @@ import com.hbq.cms.common.model.Result;
 import com.hbq.cms.dto.UserDto;
 import com.hbq.cms.model.User;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -24,7 +25,7 @@ public interface IUserService extends IService<User> {
 
     Result<String> register(UserDto userDto);
 
-    Result login(UserDto userDto);
+    Result login(UserDto userDto, HttpServletResponse response);
 
     Result updatePwd(UserDto userDto);
 }

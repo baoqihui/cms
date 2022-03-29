@@ -8,8 +8,8 @@ import com.hbq.cms.model.Media;
 import com.hbq.cms.service.IMediaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +26,8 @@ import java.util.Map;
 @RestController
 @Api(tags = "媒体")
 @RequestMapping("media")
+@AllArgsConstructor
 public class MediaController {
-    @Autowired
     private IMediaService mediaService;
 
     /**

@@ -7,8 +7,8 @@ import com.hbq.cms.model.Banner;
 import com.hbq.cms.service.IBannerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +25,8 @@ import java.util.Map;
 @RestController
 @Api(tags = "轮播图")
 @RequestMapping("banner")
+@AllArgsConstructor
 public class BannerController {
-    @Autowired
     private IBannerService bannerService;
 
     /**

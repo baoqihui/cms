@@ -9,10 +9,10 @@ import com.hbq.cms.dto.MediaDto;
 import com.hbq.cms.mapper.MediaMapper;
 import com.hbq.cms.model.Media;
 import com.hbq.cms.service.IMediaService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -23,8 +23,8 @@ import java.util.Map;
  */
 @Slf4j
 @Service
+@AllArgsConstructor
 public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements IMediaService {
-    @Resource
     private MediaMapper mediaMapper;
     /**
      * 列表

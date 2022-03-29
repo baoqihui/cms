@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbq.cms.mapper.BannerMapper;
 import com.hbq.cms.model.Banner;
 import com.hbq.cms.service.IBannerService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -20,8 +20,8 @@ import java.util.Map;
  */
 @Slf4j
 @Service
+@AllArgsConstructor
 public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> implements IBannerService {
-    @Resource
     private BannerMapper bannerMapper;
     /**
      * 列表

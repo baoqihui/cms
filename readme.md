@@ -28,6 +28,6 @@
    + 项目框架：`spring boot`
    + 数据库：`mysql`
    + 持久层框架：`mybatis plus`
-   + 非关系数据库：`redis(暂无使用)`
+   + 非关系数据库：`redis`
    + 文件存储：`自建minio`
    + 接口文档: `swagger`
