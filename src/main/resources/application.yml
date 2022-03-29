@@ -1,7 +1,7 @@
 #swagger配置
 Swagger:
-  description: (code-demo-persion-接口文档) restful 风格接口
-  title: code-demo-persion
+  description: cms-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
+  title: cms
   version: 1.0
 
 #设置生效环境配置

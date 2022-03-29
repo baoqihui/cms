@@ -1,5 +1,7 @@
 package com.hbq.cms.config;
 
+import com.hbq.cms.common.model.SysConst;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,13 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
- *
  * @author hbq
  * @date 2018/11/18 9:20
  */
@@ -28,7 +33,11 @@ class SwaggerConfig {
                 // 自行修改为自己的包路径
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                // 授权信息设置，必要的header token等认证信息
+                .securitySchemes(securitySchemes())
+                // 授权信息全局应用
+                .securityContexts(securityContexts());
     }
 
     @Value("${Swagger.title}")
@@ -37,6 +46,7 @@ class SwaggerConfig {
     String description;
     @Value("${Swagger.version}")
     String version;
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(title)
@@ -45,5 +55,23 @@ class SwaggerConfig {
                 .build();
     }
 
+    /**
+     * 设置授权信息
+     */
+    private List<SecurityScheme> securitySchemes() {
+        ApiKey apiKey = new ApiKey(SysConst.USER_TOKEN, SysConst.USER_TOKEN, In.HEADER.toValue());
+        return Collections.singletonList(apiKey);
+    }
+
+    /**
+     * 授权信息全局应用
+     */
+    private List<SecurityContext> securityContexts() {
+        return Collections.singletonList(
+                SecurityContext.builder()
+                        .securityReferences(Collections.singletonList(new SecurityReference(SysConst.USER_TOKEN, new AuthorizationScope[]{new AuthorizationScope("global", "")})))
+                        .build()
+        );
+    }
 }
 
