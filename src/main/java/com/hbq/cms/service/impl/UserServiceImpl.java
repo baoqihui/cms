@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
@@ -102,5 +103,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.failed("修改失败");
         }
         return Result.succeed("修改成功");
+    }
+
+    @Override
+    public Result logout(HttpServletRequest request) {
+        redisUtils.del(String.format(RedisKey.USER_KEY, request.getHeader(SysConst.USER_TOKEN)));
+        return Result.succeed("退出成功");
     }
 }

@@ -26,6 +26,8 @@ public class FilterConfig {
                 excludeList.add("/user/register");
                 excludeList.add("/user/login");
                 excludeList.add("/file/upload");
+                excludeList.add("/file/list/**");
+                excludeList.add("/media/list");
                 //配置需要拦截路径/*
                 registry.addInterceptor(userInterceptor)
                         .addPathPatterns("/file/**")

@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,12 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestBody UserDto userDto, HttpServletResponse response) {
         return userService.login(userDto,response);
+    }
+    // 退出登录
+    @ApiOperation(value = "退出登录")
+    @PostMapping("/logout")
+    public Result logout(HttpServletRequest request) {
+        return userService.logout(request);
     }
     /**
      * 新增or更新

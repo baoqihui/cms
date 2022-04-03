@@ -1,6 +1,7 @@
 package com.hbq.cms.common.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.hbq.cms.common.model.FileVo;
 import com.hbq.cms.util.MinioUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,7 +56,7 @@ public class FileController {
 
     @ApiOperation(value = "获取当前文件夹下文件")
     @PostMapping("/list")
-    public List<String> list(String bucketName) {
+    public List<FileVo> list(String bucketName) {
         return MinioUtil.listObjectNames(bucketName);
     }
 

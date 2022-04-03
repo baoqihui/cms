@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.hbq.cms.common.model.FileVo;
 import io.minio.*;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
@@ -223,7 +224,7 @@ public class MinioUtil {
      */
     public static List<Item> listObjects(String bucketName) {
         Iterable<Result<Item>> results = minioClient.listObjects(
-                ListObjectsArgs.builder().bucket(bucketName).build());
+                ListObjectsArgs.builder().bucket(bucketName).recursive(true).build());
         List<Item> items = new ArrayList<>();
         try {
             for (Result<Item> result : results) {
@@ -242,14 +243,19 @@ public class MinioUtil {
      * @param bucketName
      * @return
      */
-    public static List<String> listObjectNames(String bucketName) {
+    public static List<FileVo> listObjectNames(String bucketName) {
         List<Item> items = listObjects(bucketName);
         if (ObjectUtil.isEmpty(items)) {
             return new ArrayList<>();
         } else {
             return items.stream()
-                    .map(Item::objectName)
-                    .collect(Collectors.toList());
+                    .map(i -> FileVo.builder()
+                            .fileName(i.objectName())
+                            .fileSize(i.size())
+                            .filePath(preview(bucketName, i.objectName()))
+                            .fileType(FileUtil.extName(i.objectName()))
+                            .build()).collect(Collectors.toList());
+
         }
     }
 
