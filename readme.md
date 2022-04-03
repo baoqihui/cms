@@ -16,7 +16,7 @@
 
 ## 原型
 
-![原型图](https://minio.huijia.cf/file/原型初稿.png)
+![原型图](https://minio.service.cf/file/%E5%8E%9F%E5%9E%8B%E5%88%9D%E7%A8%BF.png)
 
 ## 项目技术
 1. 原始项目骨架：[个人模板](https://github.com/baoqihui/code-demo-persion)
