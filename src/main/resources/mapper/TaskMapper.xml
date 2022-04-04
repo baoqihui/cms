@@ -15,7 +15,7 @@
         from task t
         where 1=1
         <if test="p.userId != null and p.userId != ''">
-            and t.user_id LIKE '%${p.userId}%'
+            and t.user_id = #{p.userId}
         </if>
         <if test="p.title != null and p.title != ''">
             and t.title LIKE '%${p.title}%'
