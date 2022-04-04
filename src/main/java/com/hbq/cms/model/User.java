@@ -30,6 +30,8 @@ public class User extends SuperEntity {
         private Integer sex;
         @ApiModelProperty(value = "年龄")
         private Integer age;
+        @ApiModelProperty(value = "爱好")
+        private String hobby;
         @ApiModelProperty(value = "学校")
         private String school;
 }
