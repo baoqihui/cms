@@ -32,8 +32,10 @@ public class FilterConfig {
                 registry.addInterceptor(userInterceptor)
                         .addPathPatterns("/file/**")
                         .addPathPatterns("/user/**")
-                        .addPathPatterns("/banner/**")
-                        .addPathPatterns("/media/**")
+                        .addPathPatterns("/diary/**")
+                        .addPathPatterns("/question/**")
+                        .addPathPatterns("/reply/**")
+                        .addPathPatterns("/task/**")
                         .excludePathPatterns(excludeList);
             }
         };

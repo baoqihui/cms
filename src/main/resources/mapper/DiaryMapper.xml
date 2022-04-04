@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hbq.cms.mapper.BannerMapper">
+<mapper namespace="com.hbq.cms.mapper.DiaryMapper">
     <select id="findList" resultType="map">
         select
             t.id id,  -- 主键
-            t.media_id mediaId,  -- 对应的媒体id
-            t.image image,  -- 图片链接
+            t.user_id userId,  -- 用户id
+            t.context context,  -- 日记内容
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime  -- 更新时间
-        from banner t
+        from diary t
         where 1=1
-        <if test="p.mediaId != null and p.mediaId != ''">
-            and t.media_id LIKE '%${p.mediaId}%'
+        <if test="p.userId != null and p.userId != ''">
+            and t.user_id LIKE '%${p.userId}%'
         </if>
-        <if test="p.image != null and p.image != ''">
-            and t.image LIKE '%${p.image}%'
+        <if test="p.context != null and p.context != ''">
+            and t.context LIKE '%${p.context}%'
         </if>
         <if test="p.startTime != null and p.startTime != '' ">
             and t.create_time >= '${p.startTime}'

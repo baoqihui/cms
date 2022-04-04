@@ -1,14 +1,11 @@
 package com.hbq.cms.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hbq.cms.common.model.Result;
-import com.hbq.cms.dto.MediaDto;
-import com.hbq.cms.mapper.MediaMapper;
-import com.hbq.cms.model.Media;
-import com.hbq.cms.service.IMediaService;
+import com.hbq.cms.mapper.TaskMapper;
+import com.hbq.cms.model.Task;
+import com.hbq.cms.service.ITaskService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,16 +13,16 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * 媒体
+ * 任务
  *
  * @author hbq
- * @date 2022-03-26 19:40:25
+ * @date 2022-04-04 14:39:49
  */
 @Slf4j
 @Service
 @AllArgsConstructor
-public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements IMediaService {
-    private MediaMapper mediaMapper;
+public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements ITaskService {
+    private TaskMapper taskMapper;
     /**
      * 列表
      * @param params
@@ -41,16 +38,6 @@ public class MediaServiceImpl extends ServiceImpl<MediaMapper, Media> implements
             pageSize = -1;
         }
         Page<Map> pages = new Page<>(pageNum, pageSize);
-        return mediaMapper.findList(pages, params);
-    }
-
-    @Override
-    public Result share(MediaDto mediaDto) {
-        Media media = BeanUtil.copyProperties(mediaDto, Media.class);
-        boolean b = this.saveOrUpdate(media);
-        if (!b){
-            return Result.failed("分享失败");
-        }
-        return Result.succeed(media,"分享成功");
+        return taskMapper.findList(pages, params);
     }
 }

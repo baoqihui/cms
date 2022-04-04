@@ -1,6 +1,6 @@
 package com.hbq.cms.mapper;
 
-import com.hbq.cms.model.Media;
+import com.hbq.cms.model.Reply;
 import com.hbq.cms.common.mapper.SuperMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
@@ -9,13 +9,13 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.Map;
 
 /**
- * 媒体
+ * 回复
  * 
  * @author hbq
- * @date 2022-03-26 19:40:25
+ * @date 2022-04-04 14:39:49
  */
 @Mapper
-public interface MediaMapper extends SuperMapper<Media> {
+public interface ReplyMapper extends SuperMapper<Reply> {
     /**
      * 分页查询用户列表
      * @param pages

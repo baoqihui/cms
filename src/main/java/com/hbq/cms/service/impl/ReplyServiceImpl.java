@@ -1,28 +1,27 @@
 package com.hbq.cms.service.impl;
-
-import cn.hutool.core.map.MapUtil;
+import com.hbq.cms.mapper.ReplyMapper;
+import com.hbq.cms.service.IReplyService;
+import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hbq.cms.mapper.BannerMapper;
-import com.hbq.cms.model.Banner;
-import com.hbq.cms.service.IBannerService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
 import java.util.Map;
+import cn.hutool.core.map.MapUtil;
+import lombok.extern.slf4j.Slf4j;
+
+import com.hbq.cms.model.Reply;
 
 /**
- * 轮播图
+ * 回复
  *
  * @author hbq
- * @date 2022-03-26 19:53:05
+ * @date 2022-04-04 14:39:49
  */
 @Slf4j
 @Service
 @AllArgsConstructor
-public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> implements IBannerService {
-    private BannerMapper bannerMapper;
+public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply> implements IReplyService {
+    private ReplyMapper replyMapper;
     /**
      * 列表
      * @param params
@@ -38,6 +37,6 @@ public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> impleme
             pageSize = -1;
         }
         Page<Map> pages = new Page<>(pageNum, pageSize);
-        return bannerMapper.findList(pages, params);
+        return replyMapper.findList(pages, params);
     }
 }

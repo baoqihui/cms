@@ -26,7 +26,7 @@ import java.util.Map;
 @Slf4j
 @CrossOrigin
 @RestController
-@Api(tags = "用户表")
+@Api(tags = "用户")
 @RequestMapping("user")
 @AllArgsConstructor
 public class UserController {
@@ -60,7 +60,12 @@ public class UserController {
     public Result login(@RequestBody UserDto userDto, HttpServletResponse response) {
         return userService.login(userDto,response);
     }
-    // 退出登录
+
+    /**
+     * 退出登录
+     * @param request
+     * @return
+     */
     @ApiOperation(value = "退出登录")
     @PostMapping("/logout")
     public Result logout(HttpServletRequest request) {

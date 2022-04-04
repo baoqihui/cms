@@ -1,10 +1,10 @@
 server:
-  port: 8089
+  port: 8090
 
 #spring
 spring:
   datasource:
-    url: jdbc:p6spy:mysql://service.cf:3306/cms-dev?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:p6spy:mysql://service.cf:3306/cms-plus?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: HBQ521521cf*
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -35,7 +35,7 @@ mybatis-plus:
 
 #输出日志位置
 log:
-  url: C:/logs/cms
+  url: C:/logs/cms-plus
 
 #minio文件服务
 minio:

@@ -1,7 +1,7 @@
 #swagger配置
 Swagger:
-  description: cms-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
-  title: cms
+  description: cms-plus-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
+  title: cms-plus
   version: 1.0
 
 #设置生效环境配置
