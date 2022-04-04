@@ -3,7 +3,9 @@ package com.hbq.cms.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+
+import javax.validation.constraints.NotEmpty;
+
 
 /**
  * 用户表
@@ -16,12 +18,14 @@ import lombok.NonNull;
 public class UserDto {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "账号（编号）")
-    @NonNull
+    @ApiModelProperty(value = "账号（用户名）")
+    @NotEmpty(message = "账号不能为空")
     private String account;
     @ApiModelProperty(value = "用户名")
     private String name;
-    @NonNull
+    @NotEmpty(message = "请输入密码")
     @ApiModelProperty(value = "密码")
     private String pwd;
+    @ApiModelProperty(value = "修改密码")
+    private String newPwd;
 }

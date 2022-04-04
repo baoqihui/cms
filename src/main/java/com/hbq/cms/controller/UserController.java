@@ -1,5 +1,6 @@
 package com.hbq.cms.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hbq.cms.common.model.PageResult;
 import com.hbq.cms.common.model.Result;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +59,7 @@ public class UserController {
      */
     @ApiOperation(value = "登录")
     @PostMapping("/login")
-    public Result login(@RequestBody UserDto userDto, HttpServletResponse response) {
+    public Result login(@Valid @RequestBody UserDto userDto, HttpServletResponse response) {
         return userService.login(userDto,response);
     }
 
@@ -76,8 +78,8 @@ public class UserController {
      */
     @ApiOperation(value = "注册")
     @PostMapping("/register")
-    public Result register(@RequestBody UserDto userDto) {
-        return userService.register(userDto);
+    public Result register(@Valid @RequestBody User user) {
+        return userService.register(user);
     }
 
     /**
@@ -89,13 +91,17 @@ public class UserController {
         return userService.updatePwd(userDto);
     }
     /**
-     * 新增or更新
+     * 更新
      */
-    @ApiOperation(value = "新增or更新")
-    @PostMapping("/save")
-    public Result save(@RequestBody User user) {
-        userService.saveOrUpdate(user);
-        return Result.succeed("保存成功");
+    @ApiOperation(value = "更新")
+    @PostMapping("/update")
+    public Result update(@RequestBody User user) {
+        if (ObjectUtil.isNull(user.getId())){
+            return Result.failed("请输入id");
+        }
+        user.setPwd(null);
+        userService.updateById(user);
+        return Result.succeed("修改成功");
     }
     /**
      * 批量新增or更新

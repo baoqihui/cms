@@ -23,7 +23,9 @@
    + 用户名为空时，会提示输入用户名
    + 密码错误登录不了
    + 密码为空时，会提示输入密码
-
+2. 修改密码：
+   + 用户需输入正确的用户名和密码
+   + 在此前提上再输入新密码才可以修改成功
 ## 项目技术
 1. 原始项目骨架：[个人模板](https://github.com/baoqihui/code-demo-persion)
 2. 相关项目：[代码生成器](https://github.com/baoqihui/code-generator-persion)

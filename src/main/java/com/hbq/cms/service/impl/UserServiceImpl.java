@@ -6,7 +6,6 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
@@ -59,7 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Result<String> register(UserDto userDto) {
+    public Result<String> register(User userDto) {
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
                 .eq(User::getAccount, userDto.getAccount()));
         if (ObjectUtil.isNotNull(user)) {
@@ -77,11 +76,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Result login(UserDto userDto, HttpServletResponse response) {
-        User one = this.getOne(new LambdaQueryWrapper<User>()
-                .eq(User::getAccount, userDto.getAccount())
-                .eq(User::getPwd, SecureUtil.md5(userDto.getPwd()))
-        );
+        //判断账号是否存在
+        User one = userMapper.selectOne(new LambdaQueryWrapper<User>()
+                .eq(User::getAccount, userDto.getAccount()));
         if (ObjectUtil.isNull(one)) {
+            return Result.failed("账号不存在");
+        }
+        //判断密码是否正确
+        if (ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
             return Result.failed("账号密码不匹配");
         }
         //生成随机token
@@ -95,10 +97,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Result updatePwd(UserDto userDto) {
-        boolean update = this.update(new LambdaUpdateWrapper<User>()
-                .eq(User::getAccount, userDto.getAccount())
-                .set(User::getPwd, SecureUtil.md5(userDto.getPwd()))
-        );
+        User one = userMapper.selectOne(new LambdaQueryWrapper<User>()
+                .eq(User::getAccount, userDto.getAccount()));
+        if (ObjectUtil.isNull(one)) {
+            return Result.failed("账号不存在");
+        }
+        //判断密码是否正确
+        if (ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
+            return Result.failed("密码错误");
+        }
+        //更新密码
+        one.setPwd(SecureUtil.md5(userDto.getNewPwd()));
+        boolean update = this.updateById(one);
         if (!update) {
             return Result.failed("修改失败");
         }
