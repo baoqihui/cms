@@ -1,6 +1,7 @@
 package com.hbq.cms.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -63,5 +64,20 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         QuestionVo questionVo = BeanUtil.copyProperties(question, QuestionVo.class);
         questionVo.setReplies(replies);
         return Result.succeed(questionVo);
+    }
+
+    @Override
+    public Result delete(Long id) {
+        Question question = questionMapper.selectById(id);
+        if (ObjectUtil.isNull(question)) {
+            return Result.failed("问题不存在");
+        }
+        List<Reply> replies = replyMapper.selectList(new LambdaQueryWrapper<Reply>()
+                .eq(Reply::getQuestionId, id));
+        if (CollUtil.isNotEmpty(replies)) {
+            return Result.failed("该问题下有回复，不能删除");
+        }
+        questionMapper.deleteById(id);
+        return Result.succeed("删除成功");
     }
 }

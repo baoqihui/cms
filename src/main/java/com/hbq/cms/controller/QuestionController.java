@@ -5,7 +5,6 @@ import com.hbq.cms.common.model.PageResult;
 import com.hbq.cms.common.model.Result;
 import com.hbq.cms.model.Question;
 import com.hbq.cms.service.IQuestionService;
-import com.hbq.cms.vo.QuestionVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -74,10 +73,8 @@ public class QuestionController {
      * 删除
      */
     @ApiOperation(value = "批量删除")
-    @PostMapping("/del")
-    public Result delete(@RequestBody Map<String,List<Long>> map) {
-        List<Long> ids = map.get("ids");
-        questionService.removeByIds(ids);
-        return Result.succeed("删除成功");
+    @PostMapping("/del/{id}")
+    public Result delete(@PathVariable Long id) {
+        return questionService.delete(id);
     }
 }

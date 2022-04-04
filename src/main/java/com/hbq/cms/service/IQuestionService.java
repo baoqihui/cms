@@ -22,5 +22,7 @@ public interface IQuestionService extends IService<Question> {
     Page<Map> findList(Map<String, Object> params);
 
     Result findDetailById(Long id);
+
+    Result delete(Long id);
 }
 
