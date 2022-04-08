@@ -1,6 +1,5 @@
 package com.hbq.cms.vo;
 
-import com.hbq.cms.model.Reply;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -27,5 +26,5 @@ public class QuestionVo{
         @ApiModelProperty(value = "问题描述")
         private String title;
         @ApiModelProperty(value = "回复列表")
-        private List<Reply> replies;
+        private List<ReplyVo> replies;
 }

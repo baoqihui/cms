@@ -12,14 +12,18 @@ import com.hbq.cms.mapper.QuestionMapper;
 import com.hbq.cms.mapper.ReplyMapper;
 import com.hbq.cms.model.Question;
 import com.hbq.cms.model.Reply;
+import com.hbq.cms.model.User;
 import com.hbq.cms.service.IQuestionService;
+import com.hbq.cms.service.IUserService;
 import com.hbq.cms.vo.QuestionVo;
+import com.hbq.cms.vo.ReplyVo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 问题
@@ -33,7 +37,7 @@ import java.util.Map;
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> implements IQuestionService {
     private QuestionMapper questionMapper;
     private ReplyMapper replyMapper;
-
+    private IUserService userService;
     /**
      * 列表
      *
@@ -59,10 +63,16 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         if (ObjectUtil.isNull(question)) {
             return Result.failed("问题不存在");
         }
+        QuestionVo questionVo = BeanUtil.copyProperties(question, QuestionVo.class);
         List<Reply> replies = replyMapper.selectList(new LambdaQueryWrapper<Reply>()
                 .eq(Reply::getQuestionId, id));
-        QuestionVo questionVo = BeanUtil.copyProperties(question, QuestionVo.class);
-        questionVo.setReplies(replies);
+        List<ReplyVo> replyVos = replies.stream().map(reply -> {
+            User user = userService.getById(reply.getReplyUserId());
+            ReplyVo replyVo = BeanUtil.copyProperties(reply, ReplyVo.class);
+            replyVo.setReplyName(user.getName());
+            return replyVo;
+        }).collect(Collectors.toList());
+        questionVo.setReplies(replyVos);
         return Result.succeed(questionVo);
     }
 
