@@ -12,8 +12,9 @@
             t.age age,  -- 年龄
             t.hobby hobby,  -- 爱好
             t.school school,  -- 学校
+            t.type type, -- 类型
             t.create_time createTime,  -- 创建时间
-            t.update_time updateTime,  -- 更新时间
+            t.update_time updateTime  -- 更新时间
         from user t
         where 1=1
         <if test="p.account != null and p.account != ''">
