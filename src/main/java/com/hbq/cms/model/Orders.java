@@ -15,13 +15,10 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("order")
+@TableName("orders")
 @ApiModel(description = "就诊单")
-public class Order extends SuperEntity {
+public class Orders extends SuperEntity {
     private static final long serialVersionUID=1L;
-
-        @ApiModelProperty(value = "就诊单号")
-        private Long orderNo;
         @ApiModelProperty(value = "用户id")
         private Long userId;
         @ApiModelProperty(value = "医生用户id")

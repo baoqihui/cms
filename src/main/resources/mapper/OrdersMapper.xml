@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hbq.cms.mapper.OrderMapper">
+<mapper namespace="com.hbq.cms.mapper.OrdersMapper">
     <select id="findList" resultType="map">
         select
             t.id id,  -- 主键
-            t.order_no orderNo,  -- 就诊单号
             t.user_id userId,  -- 用户id
+            u.name name,  -- 用户名
             t.doctor_user_id doctorUserId,  -- 医生用户id
+            du.name doctorName,  -- 医生名
             t.context context,  -- 就诊建议
             t.drugs drugs,  -- 药品列表(,分割)
             t.status status,  -- 状态(1-新建 2-完成)
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime  -- 更新时间
-        from order t
+        from orders t
+        left join user u on t.user_id = u.id
+        left join user du on t.doctor_user_id = du.id
         where 1=1
-            <if test="p.orderNo != null and p.orderNo != ''">
-                and t.order_no LIKE '%${p.orderNo}%'
+            <if test="p.userId != null">
+                and t.user_id = #{p.userId}
             </if>
-            <if test="p.userId != null and p.userId != ''">
-                and t.user_id LIKE '%${p.userId}%'
-            </if>
-            <if test="p.doctorUserId != null and p.doctorUserId != ''">
-                and t.doctor_user_id LIKE '%${p.doctorUserId}%'
+            <if test="p.doctorUserId != null">
+                and t.doctor_user_id = #{p.doctorUserId}
             </if>
             <if test="p.context != null and p.context != ''">
                 and t.context LIKE '%${p.context}%'

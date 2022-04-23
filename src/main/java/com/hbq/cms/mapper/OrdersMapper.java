@@ -1,6 +1,6 @@
 package com.hbq.cms.mapper;
 
-import com.hbq.cms.model.Order;
+import com.hbq.cms.model.Orders;
 import com.hbq.cms.common.mapper.SuperMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @date 2022-04-23 13:31:59
  */
 @Mapper
-public interface OrderMapper extends SuperMapper<Order> {
+public interface OrdersMapper extends SuperMapper<Orders> {
     /**
      * 分页查询用户列表
      * @param pages
