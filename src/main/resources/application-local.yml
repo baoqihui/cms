@@ -32,7 +32,7 @@ mybatis-plus:
 
 #输出日志位置
 log:
-  url: C:/logs/cms-plus
+  url: C:/logs/hospital
 
 #minio文件服务
 minio:

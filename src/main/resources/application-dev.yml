@@ -39,4 +39,4 @@ minio:
 
 #输出日志位置
 log:
-  url: /out/logs/cms-plus
+  url: /out/logs/hospital
