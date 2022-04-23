@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hbq.cms.mapper.OrderMapper">
+    <select id="findList" resultType="map">
+        select
+            t.id id,  -- 主键
+            t.order_no orderNo,  -- 就诊单号
+            t.user_id userId,  -- 用户id
+            t.doctor_user_id doctorUserId,  -- 医生用户id
+            t.context context,  -- 就诊建议
+            t.drugs drugs,  -- 药品列表(,分割)
+            t.status status,  -- 状态(1-新建 2-完成)
+            t.create_time createTime,  -- 创建时间
+            t.update_time updateTime  -- 更新时间
+        from order t
+        where 1=1
+            <if test="p.orderNo != null and p.orderNo != ''">
+                and t.order_no LIKE '%${p.orderNo}%'
+            </if>
+            <if test="p.userId != null and p.userId != ''">
+                and t.user_id LIKE '%${p.userId}%'
+            </if>
+            <if test="p.doctorUserId != null and p.doctorUserId != ''">
+                and t.doctor_user_id LIKE '%${p.doctorUserId}%'
+            </if>
+            <if test="p.context != null and p.context != ''">
+                and t.context LIKE '%${p.context}%'
+            </if>
+            <if test="p.drugs != null and p.drugs != ''">
+                and t.drugs LIKE '%${p.drugs}%'
+            </if>
+            <if test="p.status != null">
+                and t.status = #{p.status}
+            </if>
+            <if test="p.startTime != null and p.startTime != '' ">
+                and t.create_time >= #{p.startTime}
+            </if>
+            <if test="p.endTime !=null and p.endTime != '' ">
+                and #{p.endTime} >= t.create_time
+            </if>
+        order by t.id desc
+    </select>
+</mapper>
