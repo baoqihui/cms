@@ -5,7 +5,7 @@ Swagger:
   version: 1.0
 
 server:
-  port: 8091
+  port: 8092
 
 #设置生效环境配置
 spring:
