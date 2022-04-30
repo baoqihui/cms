@@ -1,6 +1,5 @@
 package com.hbq.cms.model;
 
-import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.hbq.cms.common.model.SuperEntity;
 import io.swagger.annotations.ApiModel;
@@ -19,9 +18,8 @@ import lombok.EqualsAndHashCode;
 @TableName("banner")
 @ApiModel(description = "公告")
 public class Banner extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @Excel(name = "公告")
-        @ApiModelProperty(value = "公告")
-        private String name;
+    @ApiModelProperty(value = "公告")
+    private String name;
 }

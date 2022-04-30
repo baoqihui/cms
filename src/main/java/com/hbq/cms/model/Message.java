@@ -1,6 +1,5 @@
 package com.hbq.cms.model;
 
-import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.hbq.cms.common.model.SuperEntity;
 import io.swagger.annotations.ApiModel;
@@ -19,24 +18,18 @@ import lombok.EqualsAndHashCode;
 @TableName("message")
 @ApiModel(description = "消息/汇报")
 public class Message extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @Excel(name = "类型（1- 通知 2-汇报）")
-        @ApiModelProperty(value = "类型（1- 通知 2-汇报）")
-        private Integer type;
-        @Excel(name = "用户id（发送者）")
-        @ApiModelProperty(value = "用户id（发送者）")
-        private Long userId;
-        @Excel(name = "接收者id")
-        @ApiModelProperty(value = "接收者id")
-        private Long receiveUserId;
-        @Excel(name = "消息内容")
-        @ApiModelProperty(value = "消息内容")
-        private String context;
-        @Excel(name = "附件")
-        @ApiModelProperty(value = "附件")
-        private String files;
-        @Excel(name = "是否读（0-未确认 1-出错 2-已确认）")
-        @ApiModelProperty(value = "是否读（0-未确认 1-出错 2-已确认）")
-        private Integer status;
+    @ApiModelProperty(value = "类型（1- 通知 2-汇报）")
+    private Integer type;
+    @ApiModelProperty(value = "用户id（发送者）")
+    private Long userId;
+    @ApiModelProperty(value = "接收者id")
+    private Long receiveUserId;
+    @ApiModelProperty(value = "消息内容")
+    private String context;
+    @ApiModelProperty(value = "附件")
+    private String files;
+    @ApiModelProperty(value = "是否读（0-未确认 1-出错 2-已确认）")
+    private Integer status;
 }

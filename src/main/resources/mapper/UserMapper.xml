@@ -10,10 +10,12 @@
         t.pwd pwd,  -- 密码
         t.sex sex,  -- 性别（1-男 2-女）
         t.depa_id depaId,  -- 部门id
+        t.depa_name depaName,  -- 部门名称
         t.type type,  -- 类型（1-管理员 2-领导 3-员工）
         t.create_time createTime,  -- 创建时间
         t.update_time updateTime   -- 更新时间
         from user t
+        left join depa d on t.depa_id = d.id
         <where>
             <if test="p.account != null and p.account != ''">
                 and t.account LIKE '%${p.account}%'
@@ -29,6 +31,9 @@
             </if>
             <if test="p.depaId != null">
                 and t.depa_id = #{p.depaId}
+            </if>
+            <if test="p.depaName != null and p.depaName != ''">
+                and t.depa_name LIKE '%${p.depaName}%'
             </if>
             <if test="p.type != null">
                 and t.type = #{p.type}

@@ -1,21 +1,16 @@
 package com.hbq.cms.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hbq.cms.common.model.PageResult;
 import com.hbq.cms.common.model.Result;
 import com.hbq.cms.model.Message;
 import com.hbq.cms.service.IMessageService;
-import com.hbq.cms.util.EasyPoiExcelUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -84,37 +79,5 @@ public class MessageController {
         List<Long> ids = map.get("ids");
         messageService.removeByIds(ids);
         return Result.succeed("删除成功");
-    }
-    
-    /**
-     * 导入
-     */
-    @ApiOperation(value = "导入")
-    @PostMapping("/leadIn")
-    public  Result leadIn(MultipartFile excel) throws Exception {
-        int rowNum = 0;
-        if (!excel.isEmpty()) {
-            List<Message> list = EasyPoiExcelUtil.importExcel(excel, 1, 1, Message.class);
-            rowNum = list.size();
-            if (rowNum > 0) {
-                list.forEach(u -> {
-                        messageService.save(u);
-                });
-                return Result.succeed("成功导入信息"+rowNum+"行数据");
-            }
-        }
-        return Result.failed("导入失败");
-    }
-    
-    /**
-     * 导出（传入ids数组，选择指定id）
-     */
-    @ApiOperation(value = "导出（传入ids数组，选择指定id）")
-    @PostMapping("/leadOut")
-    public void leadOut(@RequestBody Map<String,List<Long>> map,HttpServletResponse response) throws IOException {
-        List<Long> ids = map.get("ids");
-        List<Message> messageList = ids==null||ids.isEmpty()? messageService.list(new QueryWrapper<>()):(List)messageService.listByIds(ids);
-        //导出操作
-        EasyPoiExcelUtil.exportExcel(messageList, "消息/汇报导出", "消息/汇报导出", Message.class, "message.xls", response);
     }
 }
