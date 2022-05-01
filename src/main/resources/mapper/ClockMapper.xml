@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hbq.cms.mapper.ClockMapper">
+    <select id="findList" resultType="map">
+        select
+        t.id userId,  -- 主键
+        t.account account,  -- 工号
+        t.name name,  -- 昵称
+        t.depa_id depaId,  -- 部门id
+        t.depa_name depaName,  -- 部门名称
+        t.type type,  -- 类型（1-管理员 2-领导 3-员工）
+        CASE WHEN c.id is null THEN 0 ELSE 1 END AS clockStatus,  -- 是否打卡（0-未打卡 1-已打卡）
+        c.create_time clockTime  -- 打卡时间
+        from `user` t
+        left join clock c on t.id = c.user_id
+        <where>
+            t.type=3
+            <if test="p.depaId != null">
+                and t.depa_id = #{p.depaId}
+            </if>
+            <if test="p.clockStatus != null">
+                and CASE WHEN c.id is null THEN 0 ELSE 1 END = #{p.clockStatus}
+            </if>
+            <if test="p.startTime != null and p.startTime != '' ">
+                and c.create_time >= #{p.startTime}
+            </if>
+            <if test="p.endTime !=null and p.endTime != '' ">
+                and #{p.endTime} >= c.create_time
+            </if>
+        </where>
+        order by t.id desc
+    </select>
+</mapper>
