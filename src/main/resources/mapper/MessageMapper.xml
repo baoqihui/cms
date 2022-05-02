@@ -7,13 +7,17 @@
             t.id id,  -- 主键
             t.type type,  -- 类型（1- 通知 2-汇报）
             t.user_id userId,  -- 用户id（发送者）
+            u.name userName,  -- 用户名（发送者）
             t.receive_user_id receiveUserId,  -- 接收者id
+            u2.name receiveUserName,  -- 接收者名
             t.context context,  -- 消息内容
             t.files files,  -- 附件
             t.status status,  -- 是否读（0-未确认 1-出错 2-已确认）
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
         from message t
+        left join user u on t.user_id = u.id
+        left join user u2 on t.receive_user_id = u2.id
         <where>
                 <if test="p.type != null">
                     and t.type = #{p.type}
