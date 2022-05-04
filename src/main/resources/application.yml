@@ -1,7 +1,7 @@
 #swagger配置
 Swagger:
-  description: demos-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
-  title: demos
+  description: train-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
+  title: train
   version: 1.0
 
 server:
