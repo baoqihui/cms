@@ -4,7 +4,7 @@
  Source Server         : service
  Source Server Type    : MySQL
  Source Server Version : 50730
- Source Host           : service.cf:3306
+ Source Host           : service.cf:3307
  Source Schema         : cms-plus
 
  Target Server Type    : MySQL
