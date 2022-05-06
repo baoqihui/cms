@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Slf4j
 @CrossOrigin
-@Api(tags = "minio文件系统")
+@Api(tags = "文件")
 @RestController
 @RequestMapping("/file")
 @AllArgsConstructor
