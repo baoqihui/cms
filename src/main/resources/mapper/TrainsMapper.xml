@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hbq.cms.mapper.TrainsMapper">
+    <select id="findList" resultType="map">
+        select
+            t.id id,  -- 主键
+            t.title title,  -- 主题
+            t.video video,  -- 视频链接
+            t.train_start_time trainStartTime,  -- 培训开始时间
+            t.train_end_time trainEndTime,  -- 培训结束时间
+            t.click_num clickNum,  -- 视频点击次数
+            t.orders orders,  -- 排序
+            t.create_time createTime,  -- 创建时间
+            t.update_time updateTime   -- 更新时间
+        from trains t
+        <where>
+            <if test="p.title != null and p.title != ''">
+                and t.title LIKE '%${p.title}%'
+            </if>
+            <if test="p.video != null and p.video != ''">
+                and t.video LIKE '%${p.video}%'
+            </if>
+            <if test="p.trainStartTime != null and p.trainStartTime != ''">
+                and t.train_start_time LIKE '%${p.trainStartTime}%'
+            </if>
+            <if test="p.trainEndTime != null and p.trainEndTime != ''">
+                and t.train_end_time LIKE '%${p.trainEndTime}%'
+            </if>
+            <if test="p.clickNum != null">
+                and t.click_num = #{p.clickNum}
+            </if>
+            <if test="p.orders != null">
+                and t.orders = #{orders}
+            </if>
+            <if test="p.startTime != null and p.startTime != '' ">
+                and t.create_time >= #{p.startTime}
+            </if>
+            <if test="p.endTime !=null and p.endTime != '' ">
+                and #{p.endTime} >= t.create_time
+            </if>
+        </where>
+        order by t.orders asc
+    </select>
+</mapper>

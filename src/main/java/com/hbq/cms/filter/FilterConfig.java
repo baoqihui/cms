@@ -27,15 +27,15 @@ public class FilterConfig {
                 excludeList.add("/user/login");
                 excludeList.add("/file/upload");
                 excludeList.add("/file/list/**");
-                excludeList.add("/media/list");
                 //配置需要拦截路径/*
                 registry.addInterceptor(userInterceptor)
                         .addPathPatterns("/file/**")
                         .addPathPatterns("/user/**")
-                        .addPathPatterns("/diary/**")
-                        .addPathPatterns("/question/**")
-                        .addPathPatterns("/reply/**")
-                        .addPathPatterns("/task/**")
+                        .addPathPatterns("/area/**")
+                        .addPathPatterns("/banner/**")
+                        .addPathPatterns("/major/**")
+                        .addPathPatterns("/trains/**")
+                        .addPathPatterns("/userTrains/**")
                         .excludePathPatterns(excludeList);
             }
         };

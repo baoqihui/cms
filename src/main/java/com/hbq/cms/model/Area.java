@@ -9,8 +9,6 @@ import lombok.EqualsAndHashCode;
 
 
 /**
- * 
- *
  * @author hbq
  * @date 2022-05-04 20:49:43
  */
@@ -19,14 +17,14 @@ import lombok.EqualsAndHashCode;
 @TableName("area")
 @ApiModel(description = "")
 public class Area extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "父节点ID")
-        private Integer parent;
-        @ApiModelProperty(value = "名字")
-        private String name;
-        @ApiModelProperty(value = "层级（0-全国 1-省 2-市 3-区）")
-        private Integer level;
-        @ApiModelProperty(value = "简称")
-        private String shortCode;
+    @ApiModelProperty(value = "父节点ID")
+    private Integer parent;
+    @ApiModelProperty(value = "名字")
+    private String name;
+    @ApiModelProperty(value = "层级（0-全国 1-省 2-市 3-区）")
+    private Integer level;
+    @ApiModelProperty(value = "简称")
+    private String shortCode;
 }

@@ -17,6 +17,7 @@
             t.major_id majorId,  -- 专业id
             t.major_name majorName,  -- 专业名
             t.type type,  -- 类型（1-用户 2-管理员）
+            t.certificate_no certificateNo,  -- 证书编号
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
         from user t
@@ -56,6 +57,12 @@
             </if>
             <if test="p.type != null">
                 and t.type = #{p.type}
+            </if>
+            <if test="p.hasCertificate == 1">
+                and t.certificate_no is not null
+            </if>
+            <if test="p.certificateNo != null and p.certificateNo != ''">
+                and t.certificate_no LIKE '%${p.certificateNo}%'
             </if>
             <if test="p.startTime != null and p.startTime != '' ">
                 and t.create_time >= #{p.startTime}
