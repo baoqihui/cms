@@ -85,7 +85,7 @@ public class MessageUtil {
      */
     public boolean isCode(String tel, String code) {
         String resultCode = redisUtils.get(String.format(RedisKey.MESSAGE_KEY,tel));
-        if (resultCode.equals(code)) {
+        if (resultCode != null && resultCode.equals(code)) {
             return true;
         }
         return false;

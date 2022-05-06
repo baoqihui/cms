@@ -1,12 +1,16 @@
 package com.hbq.cms.common.controller;
 
+import com.hbq.cms.common.model.MessageDTO;
 import com.hbq.cms.common.model.Result;
 import com.hbq.cms.util.MessageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * @Author: huibq
@@ -21,15 +25,15 @@ public class CommonController {
 
     @ApiOperation(value = "发送短信")
     @PostMapping(value="/sendMessage")
-    public Result sendMessage(String tel){
-        messageUtil.sendMessage(tel);
+    public Result sendMessage(@Valid @RequestBody MessageDTO messageDTO){
+        messageUtil.sendMessage(messageDTO.getTel());
         return Result.succeed("发送成功");
     }
 
     @ApiOperation(value = "验证短信验证码")
     @PostMapping(value="/check")
-    public Result checkMessage(String tel,String code){
-        if(messageUtil.isCode(tel,code)){
+    public Result checkMessage(@Valid @RequestBody MessageDTO messageDTO){
+        if(messageUtil.isCode(messageDTO.getTel(),messageDTO.getCode())){
             return Result.succeed("验证成功");
         }else{
             return Result.failed("验证失败");
