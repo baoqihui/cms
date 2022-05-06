@@ -124,12 +124,20 @@
             <artifactId>minio</artifactId>
             <version>8.0.3</version>
         </dependency>
+
         <!-- gson json互转-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- 短信服务-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>dysmsapi20170525</artifactId>
+            <version>2.0.9</version>
         </dependency>
     </dependencies>
 

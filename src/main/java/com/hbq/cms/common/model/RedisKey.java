@@ -7,4 +7,5 @@ package com.hbq.cms.common.model;
  */
 public class RedisKey {
     public static final String USER_KEY = "cms:" + SysConst.USER_TOKEN + ":%s";
+    public static final String MESSAGE_KEY = "msg:%s";
 }
