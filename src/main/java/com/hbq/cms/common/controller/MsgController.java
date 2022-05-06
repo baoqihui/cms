@@ -34,9 +34,9 @@ public class MsgController {
     @PostMapping(value="/check")
     public Result checkMessage(@Valid @RequestBody MessageDTO messageDTO){
         if(messageUtil.isCode(messageDTO.getTel(),messageDTO.getCode())){
-            return Result.succeed("验证成功");
+            return Result.succeed("短信验证成功");
         }else{
-            return Result.failed("验证失败");
+            return Result.failed("短信验证失败");
         }
     }
 }

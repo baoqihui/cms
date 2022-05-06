@@ -38,6 +38,7 @@ public class MessageUtil {
     private String templateCode;
     @Value("${ali.expireTime}")
     private Long expireTime;
+
     @PostConstruct
     public void init() {
         try {
