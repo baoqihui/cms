@@ -27,11 +27,12 @@ public class FilterConfig {
                 excludeList.add("/user/login");
                 excludeList.add("/file/upload");
                 excludeList.add("/file/list/**");
+                excludeList.add("/major/list");
+                excludeList.add("/trains/list");
                 //配置需要拦截路径/*
                 registry.addInterceptor(userInterceptor)
                         .addPathPatterns("/file/**")
                         .addPathPatterns("/user/**")
-                        .addPathPatterns("/area/**")
                         .addPathPatterns("/banner/**")
                         .addPathPatterns("/major/**")
                         .addPathPatterns("/trains/**")
