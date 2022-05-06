@@ -20,6 +20,7 @@ public class FilterConfig {
     @Bean
     public WebMvcConfigurer WebMvcConfigurer() {
         return new WebMvcConfigurer() {
+            @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 //排除无需拦截路径
                 List<String> excludeList=new ArrayList<>();
@@ -27,15 +28,10 @@ public class FilterConfig {
                 excludeList.add("/user/login");
                 excludeList.add("/file/upload");
                 excludeList.add("/file/list/**");
-                excludeList.add("/media/list");
                 //配置需要拦截路径/*
                 registry.addInterceptor(userInterceptor)
                         .addPathPatterns("/file/**")
                         .addPathPatterns("/user/**")
-                        .addPathPatterns("/diary/**")
-                        .addPathPatterns("/question/**")
-                        .addPathPatterns("/reply/**")
-                        .addPathPatterns("/task/**")
                         .excludePathPatterns(excludeList);
             }
         };
