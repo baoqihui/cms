@@ -7,7 +7,6 @@
             t.id id,  -- 主键
             t.account account,  -- 账号（编号）
             t.name name,  -- 用户名
-            t.tel tel,  -- 手机号
             t.pwd pwd,  -- 密码
             t.sex sex,  -- 性别（1-男 2-女）
             t.address address,  -- 地址
@@ -27,9 +26,6 @@
             </if>
             <if test="p.name != null and p.name != ''">
                 and t.name LIKE '%${p.name}%'
-            </if>
-            <if test="p.tel != null and p.tel != ''">
-                and t.tel LIKE '%${p.tel}%'
             </if>
             <if test="p.pwd != null and p.pwd != ''">
                 and t.pwd LIKE '%${p.pwd}%'
