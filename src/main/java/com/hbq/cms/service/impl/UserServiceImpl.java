@@ -84,7 +84,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.failed("账号不存在");
         }
         //判断密码是否正确
-        if (ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
+        if (ObjectUtil.isNotEmpty(userDto.getPwd()) && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
             return Result.failed("账号密码不匹配");
         }
         //生成随机token
@@ -104,7 +104,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.failed("账号不存在");
         }
         //判断密码是否正确
-        if (ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
+        if (ObjectUtil.isNotEmpty(userDto.getPwd()) && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
             return Result.failed("密码错误");
         }
         //更新密码

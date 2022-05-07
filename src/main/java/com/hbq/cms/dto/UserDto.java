@@ -23,7 +23,6 @@ public class UserDto {
     private String account;
     @ApiModelProperty(value = "用户名")
     private String name;
-    @NotEmpty(message = "请输入密码")
     @ApiModelProperty(value = "密码")
     private String pwd;
     @ApiModelProperty(value = "修改密码")
