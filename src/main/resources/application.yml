@@ -4,8 +4,8 @@ server:
 
 #swagger配置
 Swagger:
-  description: demos-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
-  title: demos
+  description: common-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
+  title: common
   version: 1.0
 
 #springboot配置

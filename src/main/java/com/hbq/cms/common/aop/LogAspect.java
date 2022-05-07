@@ -30,7 +30,7 @@ import java.util.UUID;
 @Aspect
 @Component
 @Slf4j
-public class ChecheLogAspect {
+public class LogAspect {
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private static final ThreadLocal<Long> START_TIME = new ThreadLocal<>();

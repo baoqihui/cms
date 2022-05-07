@@ -13,4 +13,4 @@ spring:
 
 #输出日志位置
 log:
-  url: /out/logs/demos
+  url: /out/logs/common

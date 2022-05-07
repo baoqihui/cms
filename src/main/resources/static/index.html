@@ -44,7 +44,7 @@
     function queryPage() {
         var name = $("#name").val();
         //页码的有效性判断
-        $.post("http://localhost:8089/file/list", {bucketName: name}, function (result) {
+        $.post("https://common.service.cf/file/list", {bucketName: name}, function (result) {
             console.log(result);
             //填充数据到tbody
             $("#tbody").empty();//清除之前的内容

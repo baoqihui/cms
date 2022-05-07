@@ -1,4 +1,4 @@
 FROM openjdk:11.0.4
-ADD /target/demos-0.0.1-SNAPSHOT.jar  /demos.jar
+ADD /target/common-0.0.1-SNAPSHOT.jar  /common.jar
 EXPOSE 8082
-ENTRYPOINT ["java","-Xms1024m","-Xmx1024m","-jar","/demos.jar","--spring.profiles.active=dev","-c"]
+ENTRYPOINT ["java","-Xms1024m","-Xmx1024m","-jar","/common.jar","--spring.profiles.active=dev","-c"]

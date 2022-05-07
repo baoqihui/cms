@@ -49,8 +49,6 @@ public enum BaseEnum {
     }
     /**
      * 使用switch进行测试
-     *
-     * @param args
      */
     public static void switchEnum(Integer id) {
         BaseEnum testEnum = getBaseEnumById(id);

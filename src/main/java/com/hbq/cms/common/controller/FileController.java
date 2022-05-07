@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 测试MinIO文件系统
+ * @Author: huibq
+ * @Date: 2022/5/7 11:41
+ * @Description: 文件
  */
 @Slf4j
 @CrossOrigin
