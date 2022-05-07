@@ -1,15 +1,16 @@
 package com.hbq.cms.service.impl;
-import com.hbq.cms.mapper.AreaMapper;
-import com.hbq.cms.service.IAreaService;
-import org.springframework.stereotype.Service;
+
+import cn.hutool.core.map.MapUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import lombok.AllArgsConstructor;
-import java.util.Map;
-import cn.hutool.core.map.MapUtil;
-import lombok.extern.slf4j.Slf4j;
-
+import com.hbq.cms.mapper.AreaMapper;
 import com.hbq.cms.model.Area;
+import com.hbq.cms.service.IAreaService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * 地区表
@@ -27,6 +28,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements IA
      * @param params
      * @return
      */
+    @Override
     public Page<Map> findList(Map<String, Object> params){
         Integer pageNum = MapUtil.getInt(params, "pageNum");
         Integer pageSize = MapUtil.getInt(params, "pageSize");

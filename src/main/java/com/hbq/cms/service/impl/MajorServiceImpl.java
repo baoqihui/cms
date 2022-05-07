@@ -1,15 +1,16 @@
 package com.hbq.cms.service.impl;
-import com.hbq.cms.mapper.MajorMapper;
-import com.hbq.cms.service.IMajorService;
-import org.springframework.stereotype.Service;
+
+import cn.hutool.core.map.MapUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import lombok.AllArgsConstructor;
-import java.util.Map;
-import cn.hutool.core.map.MapUtil;
-import lombok.extern.slf4j.Slf4j;
-
+import com.hbq.cms.mapper.MajorMapper;
 import com.hbq.cms.model.Major;
+import com.hbq.cms.service.IMajorService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * 专业
@@ -27,6 +28,7 @@ public class MajorServiceImpl extends ServiceImpl<MajorMapper, Major> implements
      * @param params
      * @return
      */
+    @Override
     public Page<Map> findList(Map<String, Object> params){
         Integer pageNum = MapUtil.getInt(params, "pageNum");
         Integer pageSize = MapUtil.getInt(params, "pageSize");

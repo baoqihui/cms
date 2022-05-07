@@ -28,6 +28,7 @@ public class UserTrainsServiceImpl extends ServiceImpl<UserTrainsMapper, UserTra
      * @param params
      * @return
      */
+    @Override
     public Page<Map> findList(Map<String, Object> params){
         Integer pageNum = MapUtil.getInt(params, "pageNum");
         Integer pageSize = MapUtil.getInt(params, "pageSize");
