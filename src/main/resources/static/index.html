@@ -11,19 +11,20 @@
     <div id="d2">
         <input id="name" class="btn-default" type="text" placeholder="bucketName"/>
         <button id="btn" class="btn-default">获取列表</button>
-
-    <table class="my-table">
-        <thead>
-        <tr>
-            <th>文件名</th>
-            <th>文件路径</th>
-            <th>文件大小</th>
-            <th>文件类型</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-    </table>
+        <input id="tel" class="btn-default" type="text" placeholder="手机号"/>
+        <button id="sendMsg" class="btn-default">发送验证码</button>
+        <table class="my-table">
+            <thead>
+            <tr>
+                <th>文件名</th>
+                <th>文件路径</th>
+                <th>文件大小</th>
+                <th>文件类型</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -39,6 +40,19 @@
             queryPage();
         }
     );
+
+$('#sendMsg').click(function () {
+    $.ajax({
+        type: "POST",
+        url: "https://common.service.cf/msg/send",
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify({tel: $("#tel").val()}),
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+        }
+    });
+});
 
     //表格填充函数
     function queryPage() {
