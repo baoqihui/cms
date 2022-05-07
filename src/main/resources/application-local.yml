@@ -13,5 +13,5 @@ spring:
 
 #输出日志位置
 log:
-  url: C:/logs/demos
+  url: C:/logs/medical
 
