@@ -24,7 +24,7 @@ public interface IUserService extends IService<User> {
      */
     Page<Map> findList(Map<String, Object> params);
 
-    Result<String> register(User user);
+    Result<String> register(UserDto userDto);
 
     Result login(UserDto userDto, HttpServletResponse response);
 

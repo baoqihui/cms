@@ -90,4 +90,14 @@ public class MessageUtil {
         }
         return false;
     }
+
+    /**
+     * 不是正确的验证码
+     * @param tel 手机号
+     * @param code 验证码
+     * @return 验证结果
+     */
+    public boolean isNotCode(String tel, String code) {
+        return !isCode(tel, code);
+    }
 }

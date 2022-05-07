@@ -78,8 +78,8 @@ public class UserController {
      */
     @ApiOperation(value = "注册")
     @PostMapping("/register")
-    public Result register(@Valid @RequestBody User user) {
-        return userService.register(user);
+    public Result register(@Valid @RequestBody UserDto userDto) {
+        return userService.register(userDto);
     }
 
     /**
@@ -87,7 +87,7 @@ public class UserController {
      */
     @ApiOperation(value = "修改密码")
     @PostMapping("/updatePwd")
-    public Result updatePwd(@RequestBody UserDto userDto) {
+    public Result updatePwd(@Valid @RequestBody UserDto userDto) {
         return userService.updatePwd(userDto);
     }
     /**

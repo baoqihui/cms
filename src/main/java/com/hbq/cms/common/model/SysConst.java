@@ -12,5 +12,8 @@ public class SysConst {
     public static final int NO = 0;
     public static final Boolean BYES = true;
     public static final Boolean BNO = false;
-    public static final String DEFAULT_PWD = "000000"; //默认密码
+    /**
+     * 默认密码
+     */
+    public static final String DEFAULT_PWD = "123456";
 }

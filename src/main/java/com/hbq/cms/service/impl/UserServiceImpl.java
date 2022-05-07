@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
+import com.hbq.cms.common.model.CodeType;
 import com.hbq.cms.common.model.RedisKey;
 import com.hbq.cms.common.model.Result;
 import com.hbq.cms.common.model.SysConst;
@@ -16,6 +17,7 @@ import com.hbq.cms.dto.UserDto;
 import com.hbq.cms.mapper.UserMapper;
 import com.hbq.cms.model.User;
 import com.hbq.cms.service.IUserService;
+import com.hbq.cms.util.MessageUtil;
 import com.hbq.cms.util.RedisUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+
+import static com.hbq.cms.common.model.SysConst.DEFAULT_PWD;
 
 /**
  * 用户表
@@ -37,6 +41,7 @@ import java.util.Map;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     private UserMapper userMapper;
     private RedisUtils redisUtils;
+    private MessageUtil messageUtil;
 
     /**
      * 列表
@@ -59,15 +64,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Result<String> register(User userDto) {
+    public Result<String> register(UserDto userDto) {
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
                 .eq(User::getAccount, userDto.getAccount()));
         if (ObjectUtil.isNotNull(user)) {
             return Result.failed("账号已存在");
         }
         User newUser = BeanUtil.copyProperties(userDto, User.class);
+        //验证码校验不通过
+        if (ObjectUtil.equal(CodeType.TEL.getCode(), userDto.getCodeType())
+                && messageUtil.isNotCode(userDto.getAccount(), userDto.getCode())) {
+            return Result.failed("验证码错误");
+        }
         //加密密码
-        newUser.setPwd(SecureUtil.md5(userDto.getPwd()));
+        newUser.setPwd(SecureUtil.md5(ObjectUtil.defaultIfEmpty(userDto.getPwd(), DEFAULT_PWD)));
         boolean save = this.save(newUser);
         if (save) {
             return Result.succeed("注册成功");
@@ -83,9 +93,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (ObjectUtil.isNull(one)) {
             return Result.failed("账号不存在");
         }
-        //判断密码是否正确
-        if (ObjectUtil.isNotEmpty(userDto.getPwd()) && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
-            return Result.failed("账号密码不匹配");
+        //如果验证码校验验证码
+        if (ObjectUtil.equal(CodeType.TEL.getCode(), userDto.getCodeType())
+                && messageUtil.isNotCode(userDto.getAccount(), userDto.getCode())) {
+            return Result.failed("验证码错误");
+        }
+        //如果密码校验密码
+        if (ObjectUtil.equal(CodeType.PWD.getCode(), userDto.getCodeType())
+                && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()), one.getPwd())) {
+                return Result.failed("账号密码不匹配");
         }
         //生成随机token
         String userToken = IdUtil.randomUUID();
@@ -103,9 +119,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (ObjectUtil.isNull(one)) {
             return Result.failed("账号不存在");
         }
-        //判断密码是否正确
-        if (ObjectUtil.isNotEmpty(userDto.getPwd()) && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()),one.getPwd())) {
-            return Result.failed("密码错误");
+        //如果验证码校验验证码
+        if (ObjectUtil.equal(CodeType.TEL.getCode(), userDto.getCodeType())
+                && messageUtil.isNotCode(userDto.getAccount(), userDto.getCode())) {
+            return Result.failed("验证码错误");
+        }
+        //如果密码校验密码
+        if (ObjectUtil.equal(CodeType.PWD.getCode(), userDto.getCodeType())
+                && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()), one.getPwd())) {
+            return Result.failed("账号密码不匹配");
         }
         //更新密码
         one.setPwd(SecureUtil.md5(userDto.getNewPwd()));
