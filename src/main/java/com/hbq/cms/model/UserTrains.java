@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.hbq.cms.common.model.SuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +15,7 @@ import lombok.EqualsAndHashCode;
  * @date 2022-05-06 11:49:32
  */
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @TableName("user_trains")
 @ApiModel(description = "用户培训")

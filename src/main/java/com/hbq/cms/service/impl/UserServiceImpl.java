@@ -9,14 +9,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
-import com.hbq.cms.common.model.CodeType;
-import com.hbq.cms.common.model.RedisKey;
-import com.hbq.cms.common.model.Result;
-import com.hbq.cms.common.model.SysConst;
+import com.hbq.cms.common.model.*;
 import com.hbq.cms.dto.UserDto;
 import com.hbq.cms.mapper.UserMapper;
 import com.hbq.cms.model.User;
+import com.hbq.cms.model.UserTrains;
+import com.hbq.cms.service.ITrainsService;
 import com.hbq.cms.service.IUserService;
+import com.hbq.cms.service.IUserTrainsService;
 import com.hbq.cms.util.MessageUtil;
 import com.hbq.cms.util.RedisUtils;
 import lombok.AllArgsConstructor;
@@ -42,6 +42,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
     private RedisUtils redisUtils;
     private MessageUtil messageUtil;
+    private ITrainsService trainsService;
+    private IUserTrainsService userTrainsService;
 
     /**
      * 列表
@@ -80,6 +82,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         newUser.setPwd(SecureUtil.md5(ObjectUtil.defaultIfEmpty(userDto.getPwd(), DEFAULT_PWD)));
         boolean save = this.save(newUser);
         if (save) {
+            //注册成功，创建初始培训记录
+            trainsService.list().forEach(train -> {
+                userTrainsService.save(UserTrains.builder()
+                        .userId(newUser.getId())
+                        .trainsId(train.getId())
+                        .status(TrainsStatus.STARTING.getCode())
+                        .build());
+            });
             return Result.succeed("注册成功");
         }
         return Result.failed("注册失败");
@@ -101,7 +111,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         //如果密码校验密码
         if (ObjectUtil.equal(CodeType.PWD.getCode(), userDto.getCodeType())
                 && ObjectUtil.notEqual(SecureUtil.md5(userDto.getPwd()), one.getPwd())) {
-                return Result.failed("账号密码不匹配");
+            return Result.failed("账号密码不匹配");
         }
         //生成随机token
         String userToken = IdUtil.randomUUID();
