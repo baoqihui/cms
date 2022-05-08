@@ -82,14 +82,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         newUser.setPwd(SecureUtil.md5(ObjectUtil.defaultIfEmpty(userDto.getPwd(), DEFAULT_PWD)));
         boolean save = this.save(newUser);
         if (save) {
-            //注册成功，创建初始培训记录
-            trainsService.list().forEach(train -> {
-                userTrainsService.save(UserTrains.builder()
-                        .userId(newUser.getId())
-                        .trainsId(train.getId())
-                        .status(TrainsStatus.STARTING.getCode())
-                        .build());
-            });
+            //用户注册成功，创建初始培训记录
+            if (newUser.getType() == 1) {
+                trainsService.list().forEach(train -> {
+                    userTrainsService.save(UserTrains.builder()
+                            .userId(newUser.getId())
+                            .trainsId(train.getId())
+                            .status(TrainsStatus.STARTING.getCode())
+                            .build());
+                });
+            }
             return Result.succeed("注册成功");
         }
         return Result.failed("注册失败");
