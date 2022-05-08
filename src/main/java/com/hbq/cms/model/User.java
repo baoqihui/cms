@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
  * 用户
  *
  * @author hbq
- * @date 2022-04-04 14:39:46
+ * @date 2022-05-08 15:04:21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -20,20 +20,16 @@ import lombok.EqualsAndHashCode;
 public class User extends SuperEntity {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "账号（用户名）")
+    @ApiModelProperty(value = "账号（编号）")
     private String account;
-    @ApiModelProperty(value = "昵称")
+    @ApiModelProperty(value = "用户名")
     private String name;
     @ApiModelProperty(value = "密码")
     private String pwd;
     @ApiModelProperty(value = "性别（1-男 2-女）")
     private Integer sex;
-    @ApiModelProperty(value = "年龄")
-    private Integer age;
-    @ApiModelProperty(value = "爱好")
-    private String hobby;
-    @ApiModelProperty(value = "学校")
-    private String school;
     @ApiModelProperty(value = "类型（1-用户 2-管理员）")
     private Integer type;
+    @ApiModelProperty(value = "证书编号")
+    private String certificateNo;
 }
