@@ -25,6 +25,7 @@ public class FilterConfig {
                 List<String> excludeList=new ArrayList<>();
                 excludeList.add("/user/register");
                 excludeList.add("/user/login");
+                excludeList.add("/user/updatePwd");
                 excludeList.add("/file/upload");
                 excludeList.add("/file/list/**");
                 excludeList.add("/major/list");
