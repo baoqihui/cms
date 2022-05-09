@@ -44,8 +44,8 @@ public class UserInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
         log.info("request url : {} 进行用户拦截校验", request.getRequestURL().toString());
         //redis里获取缓存用户
-        String json_user = redisUtils.get(String.format(RedisKey.USER_KEY, request.getHeader(SysConst.USER_TOKEN)));
-        User user = new Gson().fromJson(json_user, User.class);
+        String jsonUser = redisUtils.get(String.format(RedisKey.USER_KEY, request.getHeader(SysConst.USER_TOKEN)));
+        User user = new Gson().fromJson(jsonUser, User.class);
         if (ObjectUtil.isNotEmpty(user)) {
             log.info("user:{}放行", user.getName());
             return true;
