@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hbq.cms.mapper.BlogMapper">
+<mapper namespace="com.hbq.cms.mapper.CollectMapper">
     <select id="findList" resultType="map">
         select
             t.id id,  -- 主键
             t.user_id userId,  -- 用户id
             t.medicals_id medicalsId,  -- 医疗内容id
-            t.tile tile,  -- 标题
-            t.context context,  -- 内容
+            t.is_collect isCollect,  -- 是否收藏（0-未收藏 1-已收藏）
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
-        from blog t
+        from collect t
         <where>
             <if test="p.userId != null">
                 and t.user_id = #{p.userId}
@@ -19,8 +18,8 @@
             <if test="p.medicalsId != null">
                 and t.medicals_id = #{p.medicalsId}
             </if>
-            <if test="p.context != null and p.context != ''">
-                and t.context LIKE '%${p.context}%'
+            <if test="p.isCollect != null">
+                and t.is_collect = #{p.isCollect}
             </if>
             <if test="p.startTime != null and p.startTime != '' ">
                 and t.create_time >= #{p.startTime}

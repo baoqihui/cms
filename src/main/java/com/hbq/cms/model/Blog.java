@@ -24,6 +24,8 @@ public class Blog extends SuperEntity {
     private Long userId;
     @ApiModelProperty(value = "医疗内容id")
     private Long medicalsId;
+    @ApiModelProperty(value = "标题")
+    private String title;
     @ApiModelProperty(value = "内容")
     private String context;
 }
