@@ -7,6 +7,7 @@
             t.id id,  -- 
             t.title title,  -- 标题
             t.context context,  -- 内容
+            t.context_url contextUrl,  -- 正文文件
             t.files files,  -- 文件集合
             t.type type,  -- 类型（1-典籍 2-经络 3-医方 4-穴位 5-学习笔记）
             t.create_time createTime,  -- 创建时间

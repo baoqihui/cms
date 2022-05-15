@@ -7,7 +7,7 @@
             t.id id,  -- 主键
             t.user_id userId,  -- 用户id
             t.medicals_id medicalsId,  -- 医疗内容id
-            t.tile tile,  -- 标题
+            t.title title,  -- 标题
             t.context context,  -- 内容
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
@@ -18,6 +18,9 @@
             </if>
             <if test="p.medicalsId != null">
                 and t.medicals_id = #{p.medicalsId}
+            </if>
+            <if test="p.title != null and p.title != ''">
+                and t.title LIKE '%${p.title}%'
             </if>
             <if test="p.context != null and p.context != ''">
                 and t.context LIKE '%${p.context}%'

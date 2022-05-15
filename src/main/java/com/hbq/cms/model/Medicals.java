@@ -25,6 +25,8 @@ public class Medicals extends SuperEntity {
     private String title;
     @ApiModelProperty(value = "内容")
     private String context;
+    @ApiModelProperty(value = "正文文件")
+    private String contextUrl;
     @ApiModelProperty(value = "文件集合")
     private String files;
     @ApiModelProperty(value = "类型（1-典籍 2-经络 3-医方 4-穴位 5-学习笔记）")

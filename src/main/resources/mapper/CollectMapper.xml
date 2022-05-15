@@ -7,10 +7,12 @@
             t.id id,  -- 主键
             t.user_id userId,  -- 用户id
             t.medicals_id medicalsId,  -- 医疗内容id
+            m.title title,  -- 标题
             t.is_collect isCollect,  -- 是否收藏（0-未收藏 1-已收藏）
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
         from collect t
+        left join medicals m on t.medicals_id = m.id
         <where>
             <if test="p.userId != null">
                 and t.user_id = #{p.userId}
