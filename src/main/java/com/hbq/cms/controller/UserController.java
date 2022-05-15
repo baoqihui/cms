@@ -40,8 +40,8 @@ public class UserController {
     @ApiOperation(value = "查询列表")
     @PostMapping("/list")
     public Result<PageResult> list(@RequestBody Map<String, Object> params) {
-        Page<Map> list= userService.findList(params);
-        return Result.succeed(PageResult.restPage(list),"查询成功");
+        Page<Map> list = userService.findList(params);
+        return Result.succeed(PageResult.restPage(list), "查询成功");
     }
 
     /**
@@ -60,11 +60,12 @@ public class UserController {
     @ApiOperation(value = "登录")
     @PostMapping("/login")
     public Result login(@Valid @RequestBody UserDto userDto, HttpServletResponse response) {
-        return userService.login(userDto,response);
+        return userService.login(userDto, response);
     }
 
     /**
      * 退出登录
+     *
      * @param request
      * @return
      */
@@ -73,6 +74,7 @@ public class UserController {
     public Result logout(HttpServletRequest request) {
         return userService.logout(request);
     }
+
     /**
      * 新增or更新
      */
@@ -90,25 +92,64 @@ public class UserController {
     public Result updatePwd(@Valid @RequestBody UserDto userDto) {
         return userService.updatePwd(userDto);
     }
+
     /**
      * 更新
      */
     @ApiOperation(value = "更新")
     @PostMapping("/update")
     public Result update(@RequestBody User user) {
-        if (ObjectUtil.isNull(user.getId())){
+        if (ObjectUtil.isNull(user.getId())) {
             return Result.failed("请输入id");
         }
         user.setPwd(null);
         userService.updateById(user);
         return Result.succeed("修改成功");
     }
+
+    @ApiOperation(value = "充值")
+    @PostMapping("/recharge")
+    public Result recharge(@RequestBody User user) {
+        if (ObjectUtil.isNull(user.getId())) {
+            return Result.failed("请输入id");
+        }
+        User existUser = userService.getById(user.getId());
+        if (ObjectUtil.isNull(existUser)) {
+            return Result.failed("用户不存在");
+        }
+        user.setAmount(existUser.getAmount() + user.getAmount());
+        userService.updateById(user);
+        return Result.succeed("充值成功");
+    }
+
+    @ApiOperation(value = "购买会员")
+    @PostMapping("/pay")
+    public Result pay(@RequestBody User user) {
+        if (ObjectUtil.isNull(user.getId())) {
+            return Result.failed("请输入id");
+        }
+        User existUser = userService.getById(user.getId());
+        if (ObjectUtil.isNull(existUser)) {
+            return Result.failed("用户不存在");
+        }
+        if (ObjectUtil.equal(existUser.getIsVip(), 1)) {
+            return Result.failed("已是会员");
+        }
+        if (existUser.getAmount() < 66) {
+            return Result.failed("余额不足");
+        }
+        user.setAmount(existUser.getAmount() - 66);
+        user.setIsVip(1);
+        userService.updateById(user);
+        return Result.succeed("购买成功");
+    }
+
     /**
      * 批量新增or更新
      */
     @ApiOperation(value = "批量新增or更新")
     @PostMapping("/saveBatch")
-    public Result saveBatch(@RequestBody Map<String,List<User>> map) {
+    public Result saveBatch(@RequestBody Map<String, List<User>> map) {
         List<User> models = map.get("models");
         userService.saveOrUpdateBatch(models);
         return Result.succeed("保存成功");
@@ -119,7 +160,7 @@ public class UserController {
      */
     @ApiOperation(value = "批量删除")
     @PostMapping("/del")
-    public Result delete(@RequestBody Map<String,List<Long>> map) {
+    public Result delete(@RequestBody Map<String, List<Long>> map) {
         List<Long> ids = map.get("ids");
         userService.removeByIds(ids);
         return Result.succeed("删除成功");

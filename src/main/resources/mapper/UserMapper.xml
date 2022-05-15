@@ -9,41 +9,45 @@
             t.name name,  -- 昵称
             t.pwd pwd,  -- 密码
             t.sex sex,  -- 性别（1-男 2-女）
-            t.age age,  -- 年龄
-            t.hobby hobby,  -- 爱好
-            t.school school,  -- 学校
-            t.type type, -- 类型
+            t.email email,  -- 邮箱
+            t.amount amount,  -- 余额
+            t.is_vip isVip,  -- 是否会员（0-非会员 1-会员）
+            t.type type,  -- 类型（1-用户 2-管理员）
             t.create_time createTime,  -- 创建时间
-            t.update_time updateTime  -- 更新时间
+            t.update_time updateTime   -- 更新时间
         from user t
-        where 1=1
-        <if test="p.account != null and p.account != ''">
-            and t.account LIKE '%${p.account}%'
-        </if>
-        <if test="p.name != null and p.name != ''">
-            and t.name LIKE '%${p.name}%'
-        </if>
-        <if test="p.pwd != null and p.pwd != ''">
-            and t.pwd LIKE '%${p.pwd}%'
-        </if>
-        <if test="p.sex != null and p.sex != ''">
-            and t.sex LIKE '%${p.sex}%'
-        </if>
-        <if test="p.age != null and p.age != ''">
-            and t.age LIKE '%${p.age}%'
-        </if>
-        <if test="p.hobby != null and p.hobby != ''">
-            and t.hobby LIKE '%${p.hobby}%'
-        </if>
-        <if test="p.school != null and p.school != ''">
-            and t.school LIKE '%${p.school}%'
-        </if>
-        <if test="p.startTime != null and p.startTime != '' ">
-            and t.create_time >= '${p.startTime}'
-        </if>
-        <if test="p.endTime !=null and p.endTime != '' ">
-            and '${p.endTime}' >= t.create_time
-        </if>
+        <where>
+            <if test="p.account != null and p.account != ''">
+                and t.account LIKE '%${p.account}%'
+            </if>
+            <if test="p.name != null and p.name != ''">
+                and t.name LIKE '%${p.name}%'
+            </if>
+            <if test="p.pwd != null and p.pwd != ''">
+                and t.pwd LIKE '%${p.pwd}%'
+            </if>
+            <if test="p.sex != null">
+                and t.sex = #{p.sex}
+            </if>
+            <if test="p.email != null and p.email != ''">
+                and t.email LIKE '%${p.email}%'
+            </if>
+            <if test="p.amount != null">
+                and t.amount = #{p.amount}
+            </if>
+            <if test="p.isVip != null">
+                and t.is_vip = #{p.isVip}
+            </if>
+            <if test="p.type != null">
+                and t.type = #{p.type}
+            </if>
+            <if test="p.startTime != null and p.startTime != '' ">
+                and t.create_time >= #{p.startTime}
+            </if>
+            <if test="p.endTime !=null and p.endTime != '' ">
+                and #{p.endTime} >= t.create_time
+            </if>
+        </where>
         order by t.id desc
     </select>
 </mapper>

@@ -1,11 +1,11 @@
 #端口设置
 server:
-  port: 8082
+  port: 8095
 
 #swagger配置
 Swagger:
-  description: demos-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
-  title: demos
+  description: videos-接口文档(调取登录接口后将token值放入authorize来测试其他接口)
+  title: videos
   version: 1.0
 
 #springboot配置

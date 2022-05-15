@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hbq.cms.mapper.VideoMapper">
+    <select id="findList" resultType="map">
+        select
+            t.id id,  -- 主键
+            t.name name,  -- 课程名
+            t.img_url imgUrl,  -- 课程主图
+            t.video_url videoUrl,  -- 课程视频
+            t.type type,  -- 类别（1-java 2-Python 3-大数据 4-C 5-C#）
+            t.info info,  -- 简介
+            t.teacher teacher,  -- 讲师
+            t.is_vip isVip,  -- 属性（0-免费 1-会员）
+            t.click_num clickNum,  -- 点击次数
+            t.create_time createTime,  -- 创建时间
+            t.update_time updateTime   -- 更新时间
+        from video t
+        <where>
+            <if test="p.name != null and p.name != ''">
+                and t.name LIKE '%${p.name}%'
+            </if>
+            <if test="p.imgUrl != null and p.imgUrl != ''">
+                and t.img_url LIKE '%${p.imgUrl}%'
+            </if>
+            <if test="p.videoUrl != null and p.videoUrl != ''">
+                and t.video_url LIKE '%${p.videoUrl}%'
+            </if>
+            <if test="p.type != null">
+                and t.type = #{p.type}
+            </if>
+            <if test="p.info != null and p.info != ''">
+                and t.info LIKE '%${p.info}%'
+            </if>
+            <if test="p.teacher != null and p.teacher != ''">
+                and t.teacher LIKE '%${p.teacher}%'
+            </if>
+            <if test="p.isVip != null">
+                and t.is_vip = #{p.isVip}
+            </if>
+            <if test="p.clickNum != null">
+                and t.click_num = #{p.clickNum}
+            </if>
+            <if test="p.startTime != null and p.startTime != '' ">
+                and t.create_time >= #{p.startTime}
+            </if>
+            <if test="p.endTime !=null and p.endTime != '' ">
+                and #{p.endTime} >= t.create_time
+            </if>
+        </where>
+        order by t.id desc
+    </select>
+</mapper>

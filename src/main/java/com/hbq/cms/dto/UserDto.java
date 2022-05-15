@@ -25,5 +25,5 @@ public class UserDto extends User {
     private String code;
     @NotNull(message = "类型不能为空")
     @ApiModelProperty(value = "验证码类型")
-    private Integer codeType;
+    private Integer codeType = 1;
 }
