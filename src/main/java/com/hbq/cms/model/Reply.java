@@ -1,13 +1,11 @@
 package com.hbq.cms.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.hbq.cms.common.model.SuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.hbq.cms.common.model.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.Date;
 
 /**
  * 回复
@@ -20,12 +18,12 @@ import java.util.Date;
 @TableName("reply")
 @ApiModel(description = "回复")
 public class Reply extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "回复人id")
+    @ApiModelProperty(value = "回复人id")
     private Long replyUserId;
-        @ApiModelProperty(value = "视频id")
+    @ApiModelProperty(value = "视频id")
     private Long videoId;
-        @ApiModelProperty(value = "内容")
+    @ApiModelProperty(value = "内容")
     private String context;
 }

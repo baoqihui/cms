@@ -1,5 +1,6 @@
 package com.hbq.cms.service;
 
+import com.hbq.cms.common.model.Result;
 import com.hbq.cms.model.Video;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -19,5 +20,7 @@ public interface IVideoService extends IService<Video> {
      * @return
      */
     Page<Map> findList(Map<String, Object> params);
+
+    Result getDetail(Long id, Long userId);
 }
 

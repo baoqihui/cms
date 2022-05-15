@@ -13,6 +13,7 @@
             t.teacher teacher,  -- 讲师
             t.is_vip isVip,  -- 属性（0-免费 1-会员）
             t.click_num clickNum,  -- 点击次数
+            t.status status,  -- 状态（0-下架 1-上架）
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
         from video t
@@ -40,6 +41,9 @@
             </if>
             <if test="p.clickNum != null">
                 and t.click_num = #{p.clickNum}
+            </if>
+            <if test="p.status != null">
+                and t.status = #{p.status}
             </if>
             <if test="p.startTime != null and p.startTime != '' ">
                 and t.create_time >= #{p.startTime}

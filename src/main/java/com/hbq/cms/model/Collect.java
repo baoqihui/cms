@@ -1,13 +1,11 @@
 package com.hbq.cms.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.hbq.cms.common.model.SuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.hbq.cms.common.model.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.Date;
 
 /**
  * 收藏表
@@ -20,12 +18,12 @@ import java.util.Date;
 @TableName("collect")
 @ApiModel(description = "收藏表")
 public class Collect extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户id")
     private Long userId;
-        @ApiModelProperty(value = "视频id")
+    @ApiModelProperty(value = "视频id")
     private Long videoId;
-        @ApiModelProperty(value = "是否收藏（0-未收藏 1-已收藏）")
+    @ApiModelProperty(value = "是否收藏（0-未收藏 1-已收藏）")
     private Integer isCollect;
 }

@@ -20,16 +20,16 @@ import java.util.Date;
 @TableName("blog")
 @ApiModel(description = "笔记")
 public class Blog extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户id")
     private Long userId;
-        @ApiModelProperty(value = "视频id")
+    @ApiModelProperty(value = "视频id")
     private Long videoId;
-        @ApiModelProperty(value = "标题")
+    @ApiModelProperty(value = "标题")
     private String title;
-        @ApiModelProperty(value = "图片")
+    @ApiModelProperty(value = "图片")
     private String imgUrl;
-        @ApiModelProperty(value = "内容")
+    @ApiModelProperty(value = "内容")
     private String context;
 }

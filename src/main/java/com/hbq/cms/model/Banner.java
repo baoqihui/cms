@@ -18,10 +18,10 @@ import lombok.EqualsAndHashCode;
 @TableName("banner")
 @ApiModel(description = "轮播图")
 public class Banner extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "视频id")
+    @ApiModelProperty(value = "视频id")
     private Long videoId;
-        @ApiModelProperty(value = "图片链接")
+    @ApiModelProperty(value = "图片链接")
     private String imgUrl;
 }

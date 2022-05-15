@@ -1,22 +1,18 @@
 package com.hbq.cms.controller;
-import java.io.IOException;
-import java.util.List;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
-import javax.servlet.http.HttpServletResponse;
-
-
-import java.util.Map;
-import org.springframework.web.bind.annotation.*;
+import com.hbq.cms.common.model.PageResult;
+import com.hbq.cms.common.model.Result;
+import com.hbq.cms.model.Video;
+import com.hbq.cms.service.IVideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
-import com.hbq.cms.model.Video;
-import com.hbq.cms.service.IVideoService;
-import com.hbq.cms.common.model.PageResult;
-import com.hbq.cms.common.model.Result;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 视频
@@ -43,14 +39,10 @@ public class VideoController {
         return Result.succeed(PageResult.restPage(list),"查询成功");
     }
 
-    /**
-     * 查询
-     */
-    @ApiOperation(value = "查询")
-    @PostMapping("/sel/{id}")
-    public Result findVideoById(@PathVariable Long id) {
-        Video model = videoService.getById(id);
-        return Result.succeed(model, "查询成功");
+    @ApiOperation(value = "观看视频")
+    @PostMapping("/see/{videoId}/{userId}")
+    public Result findVideoById(@PathVariable Long videoId,@PathVariable Long userId) {
+        return videoService.getDetail(videoId,userId);
     }
 
     /**
