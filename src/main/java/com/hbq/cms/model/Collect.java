@@ -18,12 +18,12 @@ import lombok.EqualsAndHashCode;
 @TableName("collect")
 @ApiModel(description = "收藏表")
 public class Collect extends SuperEntity {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户id")
     private Long userId;
-        @ApiModelProperty(value = "医疗内容id")
+    @ApiModelProperty(value = "医疗内容id")
     private Long medicalsId;
-        @ApiModelProperty(value = "是否收藏（0-未收藏 1-已收藏）")
+    @ApiModelProperty(value = "是否收藏（0-未收藏 1-已收藏）")
     private Integer isCollect;
 }
