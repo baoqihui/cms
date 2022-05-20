@@ -62,18 +62,21 @@ public class CollectController {
     }
 
     /**
-     * 获取是否点赞
+     * 获取是否收藏
      */
-    @ApiOperation(value = "获取是否点赞")
+    @ApiOperation(value = "获取是否收藏")
     @PostMapping("/getCollect")
     public Result getCollect(@RequestBody Collect collect) {
         Collect one = collectService.getOne(new LambdaQueryWrapper<Collect>()
                 .eq(Collect::getUserId, collect.getUserId())
                 .eq(Collect::getVideoId, collect.getVideoId()));
-        if (ObjectUtil.isNull(one) || ObjectUtil.equal(0, one.getIsCollect())) {
-            return Result.succeed(false, "未收藏");
+        if (ObjectUtil.isNull(one)) {
+            return Result.succeed(null,"从未收藏");
         }
-        return Result.succeed(true,"已收藏");
+        if (ObjectUtil.equal(0, one.getIsCollect())){
+            return Result.succeed(one,"取消收藏");
+        }
+        return Result.succeed(one,"已收藏");
     }
 
     /**

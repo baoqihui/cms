@@ -141,7 +141,7 @@ public class UserController {
         user.setAmount(existUser.getAmount() - 66);
         user.setIsVip(1);
         userService.updateById(user);
-        return Result.succeed("购买成功");
+        return Result.succeed(user,"购买成功");
     }
 
     /**

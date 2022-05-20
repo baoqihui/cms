@@ -6,11 +6,14 @@
         select
             t.id id,  -- 主键
             t.reply_user_id replyUserId,  -- 回复人id
+            u.account account,  -- 账号（用户名）
+            u.name name,  -- 昵称
             t.video_id videoId,  -- 视频id
             t.context context,  -- 内容
             t.create_time createTime,  -- 创建时间
             t.update_time updateTime   -- 更新时间
         from reply t
+        left join user u on t.reply_user_id = u.id
         <where>
             <if test="p.replyUserId != null">
                 and t.reply_user_id = #{p.replyUserId}
