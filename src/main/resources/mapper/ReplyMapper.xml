@@ -21,6 +21,9 @@
             <if test="p.videoId != null">
                 and t.video_id = #{p.videoId}
             </if>
+            <if test="p.name != null and p.name != ''">
+                and u.name LIKE '%${p.name}%'
+            </if>
             <if test="p.context != null and p.context != ''">
                 and t.context LIKE '%${p.context}%'
             </if>
