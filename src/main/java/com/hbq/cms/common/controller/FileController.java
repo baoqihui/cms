@@ -59,13 +59,13 @@ public class FileController {
         return MinioUtil.listObjectNames(bucketName);
     }
     @ApiOperation(value = "获取当前文件夹下url")
-    @PostMapping("/urls")
-    public List<String> urls(String bucketName) {
+    @GetMapping ("/urls/{bucketName}")
+    public List<String> urls(@PathVariable String bucketName) {
         return MinioUtil.listObjectUrls(bucketName);
     }
     @ApiOperation(value = "随机获取一个url")
-    @GetMapping("/random")
-    public String random(String bucketName) {
+    @GetMapping("/random/{bucketName}")
+    public String random(@PathVariable String bucketName) {
         return MinioUtil.random(bucketName);
     }
 }
