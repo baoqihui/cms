@@ -3,7 +3,7 @@
 
     <!--配置日志文件输出路径，下面用${path}占位使用}-->
     <springProperty scope="context" name="LOG_URL" source="log.url" />
-    <property name="path" value="${LOG_URL}}" />
+    <property name="path" value="${LOG_URL}" />
 
     <!--0. 日志格式和颜色渲染 -->
     <!-- 彩色日志依赖的渲染类 -->
