@@ -1,7 +1,11 @@
 package com.hbq.cms.common.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.hbq.cms.common.model.FileVo;
+import com.hbq.cms.common.model.HexoToken;
 import com.hbq.cms.util.MinioUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +30,15 @@ import java.util.List;
 @AllArgsConstructor
 public class FileController {
 
+    @ApiOperation(value = "转发token")
+    @PostMapping("/get_access_token")
+    public JSONObject getVerifyCode(@RequestBody HexoToken hexoToken) {
+        String url = "https://github.com/login/oauth/access_token";
+        JSONObject body = JSONUtil.parseObj(hexoToken);
+        String post = HttpUtil.post(url, body);
+        log.info(post);
+        return JSONUtil.parseObj(post);
+    }
     @ApiOperation(value = "创建文件夹")
     @PostMapping("/createBucket")
     public void createBucket(String bucketName) {
