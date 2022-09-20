@@ -1,6 +1,7 @@
 package com.hbq.cms.common.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -34,8 +35,10 @@ public class FileController {
     @PostMapping("/get_access_token")
     public JSONObject getVerifyCode(@RequestBody HexoToken hexoToken) {
         String url = "https://github.com/login/oauth/access_token";
-        JSONObject body = JSONUtil.parseObj(hexoToken);
-        String post = HttpUtil.post(url, body);
+        String post = HttpRequest.post(url)
+                .header("accept", "application/json")
+                .body(JSONUtil.toJsonStr(hexoToken), "application/json")
+                .execute().body();
         log.info(post);
         return JSONUtil.parseObj(post);
     }
